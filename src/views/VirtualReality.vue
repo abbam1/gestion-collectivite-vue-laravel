@@ -2,7 +2,6 @@
   <div>
     <navbar
       :min-nav="navbarMinimize"
-      :toggle="toggleConfigurator"
       :class="isNavFixed ? navbarFixed : ''"
     />
   </div>
@@ -208,7 +207,7 @@ export default {
     this.$store.state.isTransparent = "bg-transparent";
   },
   methods: {
-    ...mapMutations(["navbarMinimize", "toggleConfigurator"]),
+    ...mapMutations(["navbarMinimize",]),
   },
 };
 </script>

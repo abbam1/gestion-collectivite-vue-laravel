@@ -7,6 +7,11 @@ import Profile from "@/views/Profile.vue";
 import Rtl from "@/views/Rtl.vue";
 import SignIn from "@/views/SignIn.vue";
 import SignUp from "@/views/SignUp.vue";
+import Sites from "@/views/Sites.vue";
+import Taxes from "@/views/Taxes.vue";
+import Contribuables from "@/views/Contribuables.vue";
+import Recensements from "@/views/Recensements.vue";
+import CartesContribuables from "@/views/CartesContribuables.vue";
 
 const routes = [
   {
@@ -54,6 +59,32 @@ const routes = [
     name: "Sign Up",
     component: SignUp,
   },
+  {
+    path: "/sites",
+    name: "Sites",
+    component: Sites,
+  },
+  {
+    path: "/taxes",
+    name: "Taxes",
+    component: Taxes,
+  },
+  {
+    path: "/contribuables",
+    name: "Contribuables",
+    component: Contribuables,
+  },
+  {
+    path: "/recensements",
+    name: "Recensements",
+    component: Recensements,
+  },
+  {
+    path: "/cartesContribuables",
+    name: "CartesContribuables",
+    component: CartesContribuables,
+  },
+
 ];
 
 const router = createRouter({

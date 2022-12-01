@@ -2,10 +2,8 @@
   <div class="container top-0 position-sticky z-index-sticky">
     <div class="row">
       <div class="col-12">
-        <navbar
-          is-blur="blur blur-rounded my-3 py-2 start-0 end-0 mx-4 shadow"
-          btn-background="bg-gradient-success"
-          :dark-mode="true"
+        <navbar is-blur="blur blur-rounded my-3 py-2 start-0 end-0 mx-4 shadow"
+          btn-background="bg-gradient-success" :dark-mode="true"
         />
       </div>
     </div>
@@ -19,12 +17,12 @@
               <div class="mt-8 card card-plain">
                 <div class="pb-0 card-header text-start">
                   <h3 class="font-weight-bolder text-success text-gradient">
-                    Welcome back
+                    Bienvenue
                   </h3>
-                  <p class="mb-0">Enter your email and password to sign in</p>
+                  <p class="mb-0">Entrez votre email et votre mot de passe pour vous connecter</p>
                 </div>
                 <div class="card-body">
-                  <form role="form" class="text-start">
+                  <form role="form" class="text-start" ref="loginForm" @submit.prevent="login">
                     <label>Email</label>
                     <soft-input
                       id="email"
@@ -32,34 +30,32 @@
                       placeholder="Email"
                       name="email"
                     />
-                    <label>Password</label>
+                    <label>Mot de passe</label>
                     <soft-input
                       id="password"
                       type="password"
-                      placeholder="Password"
+                      placeholder="Mot de passe"
                       name="password"
                     />
-                    <soft-switch id="rememberMe" name="rememberMe" checked>
-                      Remember me
-                    </soft-switch>
+                    
                     <div class="text-center">
                       <soft-button
                         class="my-4 mb-2"
                         variant="gradient"
                         color="success"
                         full-width
-                        >Sign in
+                        >Connexion
                       </soft-button>
                     </div>
                   </form>
                 </div>
                 <div class="px-1 pt-0 text-center card-footer px-lg-2">
                   <p class="mx-auto mb-4 text-sm">
-                    Don't have an account?
+                    Vous n'avez pas encore de compte? Cliquez 
                     <router-link
                       :to="{ name: 'Sign Up' }"
                       class="text-success text-gradient font-weight-bold"
-                      >Sign up</router-link
+                      >ici</router-link
                     >
                   </p>
                 </div>
@@ -74,7 +70,7 @@
                   :style="{
                     backgroundImage:
                       'url(' +
-                      require('@/assets/img/curved-images/curved9.jpg') +
+                      require('@/assets/img/curved-images/tresor4.png') +
                       ')',
                   }"
                 ></div>
@@ -92,10 +88,9 @@
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import AppFooter from "@/examples/PageLayout/Footer.vue";
 import SoftInput from "@/components/SoftInput.vue";
-import SoftSwitch from "@/components/SoftSwitch.vue";
 import SoftButton from "@/components/SoftButton.vue";
 const body = document.getElementsByTagName("body")[0];
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "SignIn",
@@ -103,9 +98,23 @@ export default {
     Navbar,
     AppFooter,
     SoftInput,
-    SoftSwitch,
     SoftButton,
   },
+
+  data(){
+    return {
+    loginForm:{
+      username:"",
+      password:""
+
+    }
+  }
+  },
+
+  computed:{
+    ...mapState(['axios'])
+  },
+
   created() {
     this.toggleEveryDisplay();
     this.toggleHideConfig();
@@ -118,6 +127,42 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleEveryDisplay", "toggleHideConfig"]),
+    login(){
+  let formData = new FormData(this.$refs.loginForm)
+  let url = "http://127.0.0.1:8000/api/login"
+  this.axios.post(url,formData)
+    .then(res => {
+      console.log(res) 
+      let data = res.data;
+      this.$store.state.user.data = data.user;
+      this.$store.state.user.token = data.token;
+      localStorage.setItem("collectivite_user", this.store.state.user)
+      
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  
+}
   },
 };
 </script>
+
+<style>
+.bg-gradient-success {
+    background-image: linear-gradient(310deg, #f53939 0%, #fbcf33 100%)!important;
+}
+
+.text-gradient.text-success {
+    background-image:linear-gradient(310deg, #f53939 0%, #fbcf33 100%)!important;
+}
+
+.bg-gradient-dark {
+    background-image: linear-gradient(310deg, #f53939 0%, #fbcf33 100%)!important;
+}
+
+.navbar-vertical .navbar-nav > .nav-item .nav-link.active .icon {
+    background-image: linear-gradient(310deg, #f53939 0%, #fbcf33 100%)!important;
+}
+
+</style>
