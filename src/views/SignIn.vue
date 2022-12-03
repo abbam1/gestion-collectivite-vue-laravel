@@ -2,7 +2,7 @@
   <div class="container top-0 position-sticky z-index-sticky">
     <div class="row">
       <div class="col-12">
-        <navbar is-blur="blur blur-rounded my-3 py-2 start-0 end-0 mx-4 shadow"
+        <Navbar_auth is-blur="blur blur-rounded my-3 py-2 start-0 end-0 mx-4 shadow"
           btn-background="bg-gradient-success" :dark-mode="true"
         />
       </div>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
+import Navbar_auth from "@/examples/PageLayout/Navbar_auth.vue";
 import AppFooter from "@/examples/PageLayout/Footer.vue";
 import SoftInput from "@/components/SoftInput.vue";
 import SoftButton from "@/components/SoftButton.vue";
@@ -95,7 +95,7 @@ import { mapMutations, mapState } from "vuex";
 export default {
   name: "SignIn",
   components: {
-    Navbar,
+    Navbar_auth,
     AppFooter,
     SoftInput,
     SoftButton,
@@ -130,16 +130,23 @@ export default {
     login(){
   let formData = new FormData(this.$refs.loginForm)
   let url = "http://127.0.0.1:8000/api/login"
-  this.axios.post(url,formData)
+  this.$axios.post(url,formData)
     .then(res => {
-      console.log(res) 
-      let data = res.data;
-      this.$store.state.user.data = data.user;
-      this.$store.state.user.token = data.token;
-      localStorage.setItem("collectivite_user", this.store.state.user)
+      console.log(res.data)
       
+      let data = res.data;
+      // console.log(data.user)
+      this.$store.commit("SET_USER",data.data);
+      // this.$store.state.user.token = data.data.token;
+      // console.log(this.store.state.status);
+      localStorage.setItem("collectivite_user", JSON.stringify(data.data));
+      // localStorage.setItem("collectivite_token", data.data.token);
+       this.$router.push({ path: '/' })
+      
+
     })
     .catch((err) => {
+      alert("Utilisateur inconnu")
       console.log(err)
     })
   

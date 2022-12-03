@@ -1,5 +1,5 @@
 <template>
-  <navbar btn-background="bg-gradient-primary" />
+  <Navbar_auth btn-background="bg-gradient-primary" />
   <div
     class="pt-5 m-3 page-header align-items-start min-vh-50 pb-11 border-radius-lg"
     :style="{
@@ -66,7 +66,7 @@
               <div class="mb-3">
                 <soft-input
                   name="password"
-                  type="text"
+                  type="password"
                   placeholder="Mot de passe"
                   aria-label="Password"
                 />
@@ -74,7 +74,7 @@
               <div class="mb-3">
                 <soft-input
                   name="password_confirmation"
-                  type="text"
+                  type="password"
                   placeholder="Confirmer le Mot de passe"
                   aria-label="Password"
                 />
@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
+import Navbar_auth from "@/examples/PageLayout/Navbar_auth.vue";
 import AppFooter from "@/examples/PageLayout/Footer.vue";
 import SoftInput from "@/components/SoftInput.vue";
 import SoftButton from "@/components/SoftButton.vue";
@@ -118,7 +118,7 @@ import { mapMutations, mapState } from "vuex";
 export default {
   name: "SignupBasic",
   components: {
-    Navbar,
+    Navbar_auth,
     AppFooter,
     SoftInput,
     SoftButton,
@@ -149,13 +149,18 @@ export default {
   this.axios.post(url,formData)
     .then(res => {
       console.log(res) 
+      if(res.status==200){ 
       let data = res.data;
-      this.$store.state.user.data = data.user;
-      this.$store.state.user.token = data.token;
-      localStorage.setItem("collectivite_user", this.store.state.user)
+      this.$store.state.user.data = data.data.user;
+      this.$store.state.user.token = data.data.token;
+      localStorage.setItem("collectivite_user", JSON.stringify(data.data.user))
+      this.$router.push({ path: "/sign-in" })
+      alert(" L'utilisateur a été créé avec succès")
+      }
     })
     .catch((err) => {
       console.log(err)
+      
     })
   
 }

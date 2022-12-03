@@ -27,6 +27,13 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
+        <sidenav-collapse navText="Communes" :to="{ name: 'Communes' }">
+          <template #icon>
+            <office />
+          </template>
+        </sidenav-collapse>
+      </li>
+      <li class="nav-item">
         <sidenav-collapse navText="Taxes" :to="{ name: 'Taxes' }">
           <template #icon>
             <credit-card />

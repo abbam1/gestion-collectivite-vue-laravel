@@ -20,11 +20,16 @@ import router from "./router";
 import "./assets/css/nucleo-icons.css";
 import "./assets/css/nucleo-svg.css";
 import SoftUIDashboard from "./soft-ui-dashboard";
-// import axios from "axios";
+import axios from "./plugins/axios";
+// import VueSimpleAlert from "vue-simple-alert";
+
 
 const appInstance = createApp(App);
 appInstance.use(store);
 appInstance.use(router);
 appInstance.use(SoftUIDashboard);
+// appInstance.use(VueSimpleAlert);
+appInstance.config.globalProperties.$axios = { ...axios }
+
 // appInstance.use(axios);
 appInstance.mount("#app");

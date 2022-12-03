@@ -167,7 +167,7 @@
         <form>
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Nom:</label>
-                <input type="text" class="form-control"  id="recipient-name">
+                <input type="text"  class="form-control"  id="recipient-name">
               </div>
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Description:</label>
@@ -179,8 +179,8 @@
               </div>
             </form>      </div>
       <div class="modal-footer">
-        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn bg-gradient-primary">Save changes</button>
+        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn bg-gradient-primary">Modifier</button>
       </div>
     </div>
   </div>
@@ -204,7 +204,7 @@
             <form>
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Nom:</label>
-                <input type="text" class="form-control"  id="recipient-name">
+                <input type="text" value="Siporex" class="form-control"  id="recipient-name">
               </div>
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Description:</label>
