@@ -145,8 +145,8 @@ export default {
     
     register(){
   let formData = new FormData(this.$refs.registerForm)
-  let url = "http://127.0.0.1:8000/api/register"
-  this.axios.post(url,formData)
+  let url = "/register"
+  this.$axios.post(url,formData)
     .then(res => {
       console.log(res) 
       if(res.status==200){ 

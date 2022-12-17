@@ -360,9 +360,3 @@ export default {
 </script>
 
 
-<style>
-
-.sidenav {
-    z-index: 0!important;
-}
-</style>

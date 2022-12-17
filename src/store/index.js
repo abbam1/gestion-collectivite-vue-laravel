@@ -91,7 +91,7 @@ if (user) {
     // console.log(store.state.USER)
     let userCheck = null
 
-    axios.get('http://127.0.0.1:8000/api/user', { headers: { Authorization: 'Bearer ' + store.state.user.token } })
+    axios.get('http://52.247.224.1:8082/api/user', { headers: { Authorization: 'Bearer ' + store.state.user.token } })
       .then(res => {
         userCheck = res.data;
         // console.log(userCheck);

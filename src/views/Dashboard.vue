@@ -172,5 +172,7 @@ export default {
     MiniStatisticsCard,
     ProjectsCard,
   },
+
+  
 };
 </script>

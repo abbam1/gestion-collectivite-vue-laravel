@@ -252,6 +252,12 @@
 }
 // Media fixes for iPhone 5 like resolutions
 @include media-breakpoint-down(xl) {
+
+.sidenav{
+  z-index: 9999!important;
+
+}
+
   .g-sidenav-show {
     &.rtl {
       .sidenav {
@@ -471,6 +477,7 @@
         &:hover {
           max-width: $navbar-vertical-open-width !important;
         }
+        
       }
     }
 

@@ -47,10 +47,12 @@ export default {
       colorValue = color ? `alert-${color}` : null;
 
       dismissibleValue = dismissible ? "alert-dismissible fade show" : null;
+      
 
       return `${colorValue} ${dismissibleValue}`;
     },
     getIcon: (icon) => (icon ? icon : null),
   },
+  
 };
 </script>

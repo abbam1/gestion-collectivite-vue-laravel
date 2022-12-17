@@ -31,5 +31,9 @@ export default {
     background-image: linear-gradient(310deg, #17ad37 0%, #fa963a 100%)!important;
 }
 
+.sidenav{
+z-index: 0!important; 
+
+}
 
 </style>

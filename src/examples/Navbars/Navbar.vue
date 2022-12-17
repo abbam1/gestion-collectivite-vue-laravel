@@ -22,21 +22,14 @@
                 </div>
         </div>
         <ul class="navbar-nav justify-content-end">
-          <li class="nav-item d-flex align-items-center">
-            <router-link
-              :to="{ name: 'Sign In' }"
-              class="px-0 nav-link font-weight-bold"
-              :class="textWhite ? textWhite : 'text-body'"
-            >
+          <li v-on:click="logout" class="nav-item d-flex align-items-center">
+            
               <i
                 class="fa fa-user"
                 :class="this.$store.state.isRTL ? 'ms-sm-2' : 'me-sm-1'"
               ></i>
-              <span v-if="this.$store.state.isRTL" class="d-sm-inline d-none"
-                >يسجل دخول</span
-              >
-              <span v-else class="d-sm-inline d-none">Déconnexion </span>
-            </router-link>
+              <span class="d-sm-inline d-none cursor-pointer">Déconnexion </span>
+  
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a
@@ -82,6 +75,31 @@ export default {
       this.toggleSidebarColor("bg-white");
       this.navbarMinimize();
     },
+    logout() {
+      // let formData = new FormData(this.$refs.loginForm);
+      let url = "/logout";
+      this.$axios
+        .post(url)
+        .then((res) => {
+          console.log(res.data);
+          // let data = res.data;
+          // console.log(data.user)
+          // this.$store.commit("SET_USER", data.data);
+          // this.$store.state.user.token = data.data.token;
+          // console.log(this.store.state.status);
+          localStorage.removeItem("collectivite_user");
+          // localStorage.setItem("collectivite_token", data.data.token);
+          this.$router.push({ path: "/sign-in" });
+        })
+        .catch((err) => {
+          alert("echec de la deconnexion");
+          console.log(err);
+        });
+    },
+
+
+
+
   },
   components: {
     Breadcrumbs,
@@ -105,5 +123,6 @@ export default {
       }
     });
   },
+  
 };
 </script>

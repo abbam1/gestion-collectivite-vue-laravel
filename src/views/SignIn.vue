@@ -129,7 +129,7 @@ export default {
     ...mapMutations(["toggleEveryDisplay", "toggleHideConfig"]),
     login(){
   let formData = new FormData(this.$refs.loginForm)
-  let url = "http://127.0.0.1:8000/api/login"
+  let url = "/login"
   this.$axios.post(url,formData)
     .then(res => {
       console.log(res.data)

@@ -9,7 +9,7 @@ import store from "@/store"
 
 let config = {
     // baseURL: process.env.baseURL || process.env.apiUrl || ""
-    baseURL: "http://127.0.0.1:8000",
+    baseURL: "http://52.247.224.1:8082/api",
     // timeout: 60 * 1000, // Timeout
     // withCredentials: true, // Check cross-site Access-Control
 };
