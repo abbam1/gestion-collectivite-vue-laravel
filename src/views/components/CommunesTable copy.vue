@@ -37,31 +37,76 @@
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-              <DataTable :data="itemTest"  class="table align-items-center mb-0 ">
+              <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
                       Nom
                     </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
                       Superficie
                     </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
                       Geolocalisation
                     </th>
-                    
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Modifier
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Action
                     </th>
-                    
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Modifier
-                    </th>
-                    
-                    
                   </tr>
                 </thead>
-              </DataTable>
+                <tbody>
+                  <tr v-for="item in items" :key="'commune_' + item.id">
+                    <td class="ps-4">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.nom }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.superficie }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <span class="text-xs font-weight-bold mb-0"
+                        ><i class="fas fa-solid fa-map-pin"></i
+                        >{{ item.geolocalisation }}</span
+                      >
+                    </td>
+                    <td class="text-center">
+                      <!-- Button trigger modal -->
+                      <button
+                        type="button"
+                        class="mx-3 buttonSites"
+                        @click="setEdit(item.id)"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        data-bs-original-title="Edit user"
+                      >
+                        <i class="fas fa-user-edit text-secondary"></i>
+                      </button>
+                      <!-- Button trigger modal -->
+                      <span>
+                        <button
+                          @click="deleteItem(item.id)"
+                          class="buttonSites"
+                        >
+                          <i
+                            class="cursor-pointer fas fa-trash text-secondary"
+                          ></i>
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -78,7 +123,6 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -228,31 +272,15 @@
 </template>
 
 <style>
-
 .buttonSites {
   border: none;
   background-color: white;
 }
-
- .table td, .table th {
-    white-space: nowrap;
-    text-align: -webkit-center !important;
-}
-
-i, a {
-cursor: pointer;  
-}
-
 </style>
 
 <script>
 import SoftAlert from "@/components/SoftAlert.vue";
 import SoftAlert1 from "@/components/SoftAlert1.vue";
-import DataTable from "datatables.net-vue3";
-import DataTablesLib from "datatables.net";
-
-DataTable.use(DataTablesLib);
-
 
 export default {
   name: "communesTable",
@@ -260,8 +288,6 @@ export default {
   components: {
     SoftAlert,
     SoftAlert1,
-    DataTable,
-    // DataTablesLib
   },
   data() {
     return {
@@ -269,9 +295,7 @@ export default {
       showAlertSuccess: false,
       idToEdit: null,
       items: [],
-      itemTest: [],
       formData: {},
-      
     };
   },
   methods: {
@@ -286,7 +310,6 @@ export default {
           // this.$alert("Enregistré avec succès")
           //recharger les données
           this.$refs.modalDismiss.click();
-          this.itemTest = [];
           this.getData();
           this.showAlertSuccess = true;
           //Fermer le modal
@@ -314,7 +337,6 @@ export default {
           //recharger les données
           this.$refs.closeUpdate.click();
           this.idToEdit = null;
-          this.itemTest = [];
           this.getData();
           this.showAlertSuccess = true;
           //Fermer le modal
@@ -327,12 +349,6 @@ export default {
           console.log(err);
         });
     },
-    /*supprimer*/
-
-    
-
-
-
     deleteItem(id) {
       // let formData = new FormData(this.$refs.editCommuneForm);
 
@@ -341,10 +357,13 @@ export default {
         .then((res) => {
           let data = res.data.data;
           console.log(data);
+          // this.$alert("Enregistré avec succès")
+          //recharger les données
           this.$refs.closeUpdate.click();
-          this.itemTest = [];
           this.getData();
           this.showAlertDelete = true;
+          //Fermer le modal
+          // alert("OKy")
         })
         .catch((err) => {
           console.log(err);
@@ -356,26 +375,6 @@ export default {
         .get("/communes")
         .then((res) => {
           this.items = res.data.data;
-/*mettre les données dans un tableau*/
-          for (let i in this.items) {
-            if(this.items[i].id) {
-              let data = [];
-              let modifier =`<i class="fas fa-user-edit text-secondary" data-bs-toggle="modal" data-bs-original-title="Edit user" data-bs-target="#exampleModal" @click="${this.setEdit(this.items[i].id)}"></i>`
-              let supprimer =`<button class="cursor-pointer fas fa-trash text-secondary" @click="${()=>this.deleteItem(this.items[i].id)}"></button>`
-
-            data.push(this.items[i].nom);
-            data.push(this.items[i].superficie);
-            data.push(this.items[i].geolocalisation);
-            data.push(modifier);
-            data.push(supprimer);
-
-            this.itemTest.push(data);
-            }
-          }
-          console.log(this.itemTest);
-          
-/*mettre les données dans un tableau*/
-
         })
         .catch((err) => {
           console.log(err);
@@ -383,9 +382,8 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.getData();
-    
   },
 };
 </script>

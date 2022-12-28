@@ -51,13 +51,8 @@
                     </th>
                     
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Modifier
+                      Action
                     </th>
-                    
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Modifier
-                    </th>
-                    
                     
                   </tr>
                 </thead>
@@ -239,10 +234,10 @@
     text-align: -webkit-center !important;
 }
 
-i, a {
-cursor: pointer;  
-}
-
+.table > :not(caption) > * > * {
+    padding: 0.5rem!important;
+     border-bottom-width: 0.5px !important;
+    }  
 </style>
 
 <script>
@@ -341,10 +336,14 @@ export default {
         .then((res) => {
           let data = res.data.data;
           console.log(data);
+          //this.$alert("Enregistré avec succès")
+          //recharger les données
           this.$refs.closeUpdate.click();
           this.itemTest = [];
           this.getData();
           this.showAlertDelete = true;
+          //Fermer le modal
+          // alert("OKy")
         })
         .catch((err) => {
           console.log(err);
@@ -360,15 +359,18 @@ export default {
           for (let i in this.items) {
             if(this.items[i].id) {
               let data = [];
-              let modifier =`<i class="fas fa-user-edit text-secondary" data-bs-toggle="modal" data-bs-original-title="Edit user" data-bs-target="#exampleModal" @click="${this.setEdit(this.items[i].id)}"></i>`
-              let supprimer =`<button class="cursor-pointer fas fa-trash text-secondary" @click="${()=>this.deleteItem(this.items[i].id)}"></button>`
-
             data.push(this.items[i].nom);
             data.push(this.items[i].superficie);
             data.push(this.items[i].geolocalisation);
-            data.push(modifier);
-            data.push(supprimer);
-
+            let button ='<button'+
+                        'type="button"'+
+                        'class="mx-3 buttonSites"'+
+                        '@click="setEdit(items.id)"'+
+                        'data-bs-toggle="modal"'+
+                        'data-bs-target="#exampleModal"'+
+                        'data-bs-original-title="Edit user">'+
+                        '<i class="fas fa-user-edit text-secondary"></i>'+ '</button>'
+            data.push(button);
             this.itemTest.push(data);
             }
           }
