@@ -23,14 +23,6 @@ import SoftUIDashboard from "./soft-ui-dashboard";
 import axios from "./plugins/axios";
 // import VueSimpleAlert from "vue-simple-alert";
 
-import DataTable from 'datatables.net-vue3'
-import DataTablesLib from 'datatables.net';
-import 'datatables.net-select';
- 
-DataTable.use(DataTablesLib);
-
-
-
 const appInstance = createApp(App);
 appInstance.use(store);
 appInstance.use(router);

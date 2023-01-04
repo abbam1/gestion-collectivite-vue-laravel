@@ -37,31 +37,79 @@
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-              <DataTable :data="itemTest"  class="table align-items-center mb-0 ">
+              <table class="table align-items-center mb-0" id="datatable">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
                       Nom
                     </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
                       Superficie
                     </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
                       Geolocalisation
                     </th>
-                    
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Modifier
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Action
                     </th>
-                    
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Modifier
-                    </th>
-                    
-                    
                   </tr>
                 </thead>
-              </DataTable>
+                <tbody>
+                  <tr v-for="item in items" :key="'commune_' + item.id">
+                    <td class="ps-4">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.nom }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.superficie }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <span class="text-xs font-weight-bold mb-0"
+                        ><i class="fas fa-solid fa-map-pin"></i
+                        >{{ item.geolocalisation }}</span
+                      >
+                    </td>
+                    <td class="text-center">
+                      <!-- Button trigger modal -->
+                      <button
+                        type="button"
+                        class="mx-3 buttonSites"
+                        @click="setEdit(item.id)"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        data-bs-original-title="Edit user"
+                      >
+                        <i class="fas fa-user-edit text-secondary"></i>
+                      </button>
+                      <!-- Button trigger modal -->
+                      <span>
+                        <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal1"
+                        data-bs-original-title="Delete user" 
+                        @click="setEdit(item.id)"                  
+                        class="buttonSites"
+                        >
+                          <i
+                            class="cursor-pointer fas fa-trash text-secondary"
+                          ></i>
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -78,7 +126,6 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -136,7 +183,7 @@
               >
                 Fermer
               </button>
-              <button type="submit" class="btn bg-gradient-primary">
+              <button type="submit" class="btn bg-gradient-primary" data-bs-dismiss="modal">
                 Modifier
               </button>
             </div>
@@ -146,6 +193,61 @@
     </div>
   </div>
   <!-- Modal pour modifier -->
+
+<!--Modal pour Supprimer-->
+<div
+    class="modal fade"
+    id="exampleModal1"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Supprimer une commune
+          </h5>
+          <button
+            type="button"
+            class="btn-close text-dark"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4 class="modal-title" id="exampleModalLabel">
+            Êtes-vous sûr de vouloir supprimer?
+          </h4>
+            <div class="modal-footer">
+              <button
+                type="button"
+                ref="closeUpdate"
+                class="btn bg-gradient-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fermer
+              </button>
+              <button data-bs-dismiss="modal" @click="deleteItem(id)" class="btn bg-gradient-primary">
+                Confirmer
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Modal pour Supprimer-->
+
+
+
+
+
+
+
 
   <!--Modal pour ajouter-->
   <div
@@ -228,31 +330,20 @@
 </template>
 
 <style>
-
 .buttonSites {
   border: none;
   background-color: white;
 }
-
- .table td, .table th {
-    white-space: nowrap;
-    text-align: -webkit-center !important;
-}
-
-i, a {
-cursor: pointer;  
-}
-
 </style>
 
 <script>
 import SoftAlert from "@/components/SoftAlert.vue";
 import SoftAlert1 from "@/components/SoftAlert1.vue";
-import DataTable from "datatables.net-vue3";
-import DataTablesLib from "datatables.net";
-
-DataTable.use(DataTablesLib);
-
+import $ from "jquery";
+import "jquery/dist/jquery.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
 
 export default {
   name: "communesTable",
@@ -260,8 +351,6 @@ export default {
   components: {
     SoftAlert,
     SoftAlert1,
-    DataTable,
-    // DataTablesLib
   },
   data() {
     return {
@@ -269,9 +358,7 @@ export default {
       showAlertSuccess: false,
       idToEdit: null,
       items: [],
-      itemTest: [],
       formData: {},
-      
     };
   },
   methods: {
@@ -286,7 +373,6 @@ export default {
           // this.$alert("Enregistré avec succès")
           //recharger les données
           this.$refs.modalDismiss.click();
-          this.itemTest = [];
           this.getData();
           this.showAlertSuccess = true;
           //Fermer le modal
@@ -314,7 +400,6 @@ export default {
           //recharger les données
           this.$refs.closeUpdate.click();
           this.idToEdit = null;
-          this.itemTest = [];
           this.getData();
           this.showAlertSuccess = true;
           //Fermer le modal
@@ -327,24 +412,21 @@ export default {
           console.log(err);
         });
     },
-    /*supprimer*/
-
-    
-
-
-
-    deleteItem(id) {
+    deleteItem() {
       // let formData = new FormData(this.$refs.editCommuneForm);
 
       this.$axios
-        .delete("/communes/" + id)
+        .delete("/communes/" + this.idToEdit)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
+          // this.$alert("Enregistré avec succès")
+          //recharger les données
           this.$refs.closeUpdate.click();
-          this.itemTest = [];
           this.getData();
           this.showAlertDelete = true;
+          //Fermer le modal
+          // alert("OKy")
         })
         .catch((err) => {
           console.log(err);
@@ -356,26 +438,9 @@ export default {
         .get("/communes")
         .then((res) => {
           this.items = res.data.data;
-/*mettre les données dans un tableau*/
-          for (let i in this.items) {
-            if(this.items[i].id) {
-              let data = [];
-              let modifier =`<i class="fas fa-user-edit text-secondary" data-bs-toggle="modal" data-bs-original-title="Edit user" data-bs-target="#exampleModal" @click="${this.setEdit(this.items[i].id)}"></i>`
-              let supprimer =`<button class="cursor-pointer fas fa-trash text-secondary" @click="${()=>this.deleteItem(this.items[i].id)}"></button>`
-
-            data.push(this.items[i].nom);
-            data.push(this.items[i].superficie);
-            data.push(this.items[i].geolocalisation);
-            data.push(modifier);
-            data.push(supprimer);
-
-            this.itemTest.push(data);
-            }
-          }
-          console.log(this.itemTest);
-          
-/*mettre les données dans un tableau*/
-
+          $(document).ready( function () {
+          $('#datatable').DataTable();
+            } );
         })
         .catch((err) => {
           console.log(err);
@@ -383,9 +448,8 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.getData();
-    
   },
 };
 </script>
