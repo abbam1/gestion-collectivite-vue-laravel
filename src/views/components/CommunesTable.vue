@@ -35,9 +35,9 @@
               <!-- Button trigger modal -->
             </div>
           </div>
-          <div class="card-body px-0 pt-0 pb-2">
-            <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0" id="datatable">
+          <div class="card-body  pb-2">
+            <div class="table-responsive">
+              <table class="table align-items-center" id="datatable">
                 <thead>
                   <tr>
                     <th
@@ -76,7 +76,6 @@
                     </td>
                     <td class="text-center">
                       <span class="text-xs font-weight-bold mb-0"
-                        ><i class="fas fa-solid fa-map-pin"></i
                         >{{ item.geolocalisation }}</span
                       >
                     </td>
@@ -375,6 +374,7 @@ export default {
           this.$refs.modalDismiss.click();
           this.getData();
           this.showAlertSuccess = true;
+          location.reload();
           //Fermer le modal
           // alert("OKy")
           this.formData.nom = " ";
