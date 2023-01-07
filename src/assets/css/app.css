@@ -2,3 +2,6 @@
     background-image: linear-gradient(310deg, #ff981e 0%, #b26812 100%)!important;
 }
 
+.swal2-styled.swal2-confirm {
+    background-color: #f6921d !important;
+}

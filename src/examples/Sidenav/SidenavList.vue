@@ -48,6 +48,13 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
+        <sidenav-collapse navText="Comptes-Taxes" :to="{ name: 'ComptesTaxes' }">
+          <template #icon>
+            <office />
+          </template>
+        </sidenav-collapse>
+      </li>
+      <li class="nav-item">
         <sidenav-collapse navText="Recensements" :to="{ name: 'Recensements' }">
           <template #icon>
             <office />

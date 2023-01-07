@@ -21,7 +21,7 @@ import "./assets/css/nucleo-icons.css";
 import "./assets/css/nucleo-svg.css";
 import SoftUIDashboard from "./soft-ui-dashboard";
 import axios from "./plugins/axios";
-// import VueSimpleAlert from "vue-simple-alert";
+
 
 const appInstance = createApp(App);
 appInstance.use(store);

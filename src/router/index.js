@@ -12,9 +12,9 @@ import Taxes from "@/views/Taxes.vue";
 import Contribuables from "@/views/Contribuables.vue";
 import Recensements from "@/views/Recensements.vue";
 import CartesContribuables from "@/views/CartesContribuables.vue";
-import Test from "@/views/Test.vue"
-import Communes from "@/views/Communes.vue"
-import CommuneShow from "@/views/CommuneShow"
+import ComptesTaxes from "@/views/ComptesTaxes.vue";
+import Communes from "@/views/Communes.vue";
+import CommuneShow from "@/views/CommuneShow";
 
 const routes = [
   {
@@ -78,6 +78,11 @@ const routes = [
     component: Contribuables,
   },
   {
+    path: "/comptesTaxes",
+    name: "ComptesTaxes",
+    component: ComptesTaxes,
+  },
+  {
     path: "/recensements",
     name: "Recensements",
     component: Recensements,
@@ -87,11 +92,7 @@ const routes = [
     name: "CartesContribuables",
     component: CartesContribuables,
   },
-  {
-    path: "/test",
-    name: "test",
-    component: Test,
-  },
+  
   {
     path: "/communes",
     name: "Communes",

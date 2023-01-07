@@ -3,9 +3,9 @@
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
         ><strong
-          >Bienvenue sur l'espace de gestion des Sites, vous pouvez</strong
+          >Bienvenue sur l'espace de gestion des Comptes-Taxes, vous pouvez</strong
         >
-        <strong> Ajouter, modifier ou Supprimer un sites</strong>
+        <strong> Ajouter, modifier ou Supprimer un compte-taxe</strong>
       </span>
     </div>
 
@@ -15,7 +15,7 @@
           <div class="card-header pb-0">
             <div class="d-flex flex-row justify-content-between">
               <div>
-                <h5 class="mb-0">Tout les Sites</h5>
+                <h5 class="mb-0">Tout les Comptes-Taxes</h5>
               </div>
               <!-- Button trigger modal -->
               <button
@@ -25,7 +25,7 @@
                 data-bs-target="#exampleModalMessage"
                 @click="clearInput()"
               >
-                +&nbsp; Ajouter un Site
+                +&nbsp; Ajouter un Compte-Taxe
               </button>
               <!-- Button trigger modal -->
             </div>
@@ -43,12 +43,7 @@
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Description
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Geolocalisation
+                      Code
                     </th>
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -63,7 +58,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in items" :key="'site_' + item.id">
+                  <tr v-for="item in items" :key="'comptetaxe_' + item.id">
                     <td class="ps-4">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.nom }}
@@ -71,12 +66,7 @@
                     </td>
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.description }}
-                      </p>
-                    </td>
-                    <td class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">
-                        {{ item.geolocalisation }}
+                        {{ item.code }}
                       </p>
                     </td>
                     <td class="text-center">
@@ -134,7 +124,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Modifier un Site
+            Modifier un Compte-taxe
           </h5>
           <button
             type="button"
@@ -146,7 +136,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form ref="editSitesForm" @submit.prevent="editForm">
+          <form ref="editCompteTaxesForm" @submit.prevent="editForm">
             <input type="hidden" name="_method" value="put" />
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
@@ -159,23 +149,12 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Description:</label
+                >Code:</label
               >
               <input
                 type="text"
                 class="form-control"
-                name="description"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Geolocalisation:</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="geolocalisation"
+                name="code"
                 id="recipient-name"
               />
             </div>
@@ -226,7 +205,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Supprimer un site
+            Supprimer une commune
           </h5>
           <button
             type="button"
@@ -239,7 +218,7 @@
         </div>
         <div class="modal-body">
           <h5 class="modal-title" id="exampleModalLabel">
-            Êtes-vous sûr de vouloir supprimer ce site?
+            Êtes-vous sûr de vouloir supprimer cette commune?
           </h5>
           <div class="modal-footer">
             <button
@@ -277,7 +256,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Ajouter un Site
+            Ajouter un Compte-Taxe
           </h5>
           <button
             type="button"
@@ -289,7 +268,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form ref="addSitesForm" @submit.prevent="addForm">
+          <form ref="addCompteTaxesForm" @submit.prevent="addForm">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
               <input
@@ -302,25 +281,13 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Description:</label
+                >Code:</label
               >
               <input
                 type="text"
-                v-model="formData.description"
+                v-model="formData.code"
                 class="form-control"
-                name="description"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Geolocalisation:</label
-              >
-              <input
-                type="text"
-                v-model="formData.geolocalisation"
-                class="form-control"
-                name="geolocalisation"
+                name="code"
                 id="recipient-name"
               />
             </div>
@@ -376,12 +343,12 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import Swal from "sweetalert2";
 
 export default {
-  name: "SitesTable",
+  name: "ComptesTaxesTable",
 
   components: {},
   data() {
     return {
-      url: "/sites",
+      url: "/comptetaxes",
       showAlertSuccess: false,
       idToEdit: null,
       items: [],
@@ -390,10 +357,10 @@ export default {
   },
   methods: {
     addForm() {
-      let formData = new FormData(this.$refs.addSitesForm);
+      let formData = new FormData(this.$refs.addCompteTaxesForm);
 
       this.$axios
-        .post("/sites", formData)
+        .post("/comptetaxes", formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -406,7 +373,7 @@ export default {
           if (
             Swal.fire({
               icon: "success",
-              title: "Site enregistré avec success",
+              title: "Compte-taxe enregistrée avec success",
               showConfirmButton: false,
               timer: 2000,
             })
@@ -416,15 +383,14 @@ export default {
             }, 2000);
           }
           this.formData.nom = " ";
-          this.formData.description = " ";
-          this.formData.geolocalisation = " ";
+          this.formData.code = " ";
           this.formData.commune_id = " ";
         })
         .catch((err) => {
           console.log(err);
           Swal.fire({
             icon: "warning",
-            title: "Site déjà existant",
+            title: "Compte-taxes déjà existante",
             showConfirmButton: true,
           });
         });
@@ -432,21 +398,19 @@ export default {
     setEdit(id, item) {
       this.idToEdit = id;
       $("input[name=nom]").val(item.nom);
-      $("input[name=description]").val(item.description);
-      $("input[name=geolocalisation]").val(item.geolocalisation);
+      $("input[name=code]").val(item.code);
       $("textarea[name=commune_id]").val(item.commune_id);
     },
     clearInput() {
       $("input[name=nom]").val("");
-      $("input[name=description]").val("");
-      $("input[name=geolocalisation]").val("");
+      $("input[name=code]").val("");
       $("textarea[name=commune_id]").val("");
     },
     editForm() {
-      let formData = new FormData(this.$refs.editSitesForm);
+      let formData = new FormData(this.$refs.editCompteTaxesForm);
 
       this.$axios
-        .post("/sites/" + this.idToEdit, formData)
+        .post("/comptetaxes/" + this.idToEdit, formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -457,15 +421,14 @@ export default {
           this.getData();
           Swal.fire({
             icon: "success",
-            title: "Site modifié avec success",
+            title: "Compte-taxes modifiée avec success",
             showConfirmButton: false,
             timer: 2000,
           });
           //Fermer le modal
           // alert("OKy")
           this.formData.nom = " ";
-          this.formData.description = " ";
-          this.formData.geolocalisation = " ";
+          this.formData.code = " ";
           this.formData.commune_id = " ";
         })
         .catch((err) => {
@@ -476,7 +439,7 @@ export default {
       // let formData = new FormData(this.$refs.editCommuneForm);
 
       this.$axios
-        .delete("/sites/" + this.idToEdit)
+        .delete("/comptetaxes/" + this.idToEdit)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -487,7 +450,7 @@ export default {
           if (
             Swal.fire({
               icon: "success",
-              title: "Site supprimé avec success",
+              title: "Compte-taxes supprimée avec success",
               showConfirmButton: false,
               timer: 2000,
             })
@@ -505,7 +468,7 @@ export default {
 
     async getData() {
       this.$axios
-        .get("/sites")
+        .get("/comptetaxes")
         .then((res) => {
           this.items = res.data.data;
           $(document).ready(function () {

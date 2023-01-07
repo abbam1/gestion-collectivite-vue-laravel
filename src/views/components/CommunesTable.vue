@@ -1,11 +1,5 @@
 <template>
   <div class="main-content">
-    <SoftAlert v-show="showAlertSuccess" icon="fa fa-check" dismissible>
-      <p>Commune enregistrée avec succès</p>
-    </SoftAlert>
-    <SoftAlert1 v-show="showAlertDelete" icon="fa fa-check" dismissible>
-      <p>Commune suprimée avec succès</p>
-    </SoftAlert1>
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
         ><strong
@@ -29,13 +23,14 @@
                 class="btn bg-gradient-primary btn-sm mb-0 buttonSites"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModalMessage"
+                @click="clearInput()"
               >
                 +&nbsp; Ajouter une commune
               </button>
               <!-- Button trigger modal -->
             </div>
           </div>
-          <div class="card-body  pb-2">
+          <div class="card-body pb-2">
             <div class="table-responsive">
               <table class="table align-items-center" id="datatable">
                 <thead>
@@ -75,16 +70,16 @@
                       </p>
                     </td>
                     <td class="text-center">
-                      <span class="text-xs font-weight-bold mb-0"
-                        >{{ item.geolocalisation }}</span
-                      >
+                      <span class="text-xs font-weight-bold mb-0">{{
+                        item.geolocalisation
+                      }}</span>
                     </td>
                     <td class="text-center">
                       <!-- Button trigger modal -->
                       <button
                         type="button"
                         class="mx-3 buttonSites"
-                        @click="setEdit(item.id)"
+                        @click="setEdit(item.id, item)"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                         data-bs-original-title="Edit user"
@@ -94,11 +89,11 @@
                       <!-- Button trigger modal -->
                       <span>
                         <button
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal1"
-                        data-bs-original-title="Delete user" 
-                        @click="setEdit(item.id)"                  
-                        class="buttonSites"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal1"
+                          data-bs-original-title="Delete user"
+                          @click="setEdit(item.id)"
+                          class="buttonSites"
                         >
                           <i
                             class="cursor-pointer fas fa-trash text-secondary"
@@ -182,7 +177,11 @@
               >
                 Fermer
               </button>
-              <button type="submit" class="btn bg-gradient-primary" data-bs-dismiss="modal">
+              <button
+                type="submit"
+                class="btn bg-gradient-primary"
+                data-bs-dismiss="modal"
+              >
                 Modifier
               </button>
             </div>
@@ -193,8 +192,8 @@
   </div>
   <!-- Modal pour modifier -->
 
-<!--Modal pour Supprimer-->
-<div
+  <!--Modal pour Supprimer-->
+  <div
     class="modal fade"
     id="exampleModal1"
     tabindex="-1"
@@ -202,7 +201,6 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -219,34 +217,31 @@
           </button>
         </div>
         <div class="modal-body">
-          <h4 class="modal-title" id="exampleModalLabel">
-            Êtes-vous sûr de vouloir supprimer?
-          </h4>
-            <div class="modal-footer">
-              <button
-                type="button"
-                ref="closeUpdate"
-                class="btn bg-gradient-secondary"
-                data-bs-dismiss="modal"
-              >
-                Fermer
-              </button>
-              <button data-bs-dismiss="modal" @click="deleteItem(id)" class="btn bg-gradient-primary">
-                Confirmer
-              </button>
-            </div>
+          <h5 class="modal-title" id="exampleModalLabel">
+            Êtes-vous sûr de vouloir supprimer cette commune?
+          </h5>
+          <div class="modal-footer">
+            <button
+              type="button"
+              ref="closeUpdate"
+              class="btn bg-gradient-secondary"
+              data-bs-dismiss="modal"
+            >
+              Fermer
+            </button>
+            <button
+              data-bs-dismiss="modal"
+              @click="deleteItem(id)"
+              class="btn bg-gradient-primary"
+            >
+              Confirmer
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-<!--Modal pour Supprimer-->
-
-
-
-
-
-
-
+  <!--Modal pour Supprimer-->
 
   <!--Modal pour ajouter-->
   <div
@@ -333,24 +328,24 @@
   border: none;
   background-color: white;
 }
+
+.swal2-styled.swal2-confirm {
+  background-color: #f6921d !important;
+}
 </style>
 
 <script>
-import SoftAlert from "@/components/SoftAlert.vue";
-import SoftAlert1 from "@/components/SoftAlert1.vue";
-import $ from "jquery";
 import "jquery/dist/jquery.min.js";
+import $ from "jquery";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
+import Swal from "sweetalert2";
 
 export default {
   name: "communesTable",
 
-  components: {
-    SoftAlert,
-    SoftAlert1,
-  },
+  components: {},
   data() {
     return {
       url: "/communes",
@@ -370,23 +365,46 @@ export default {
           let data = res.data.data;
           console.log(data);
           // this.$alert("Enregistré avec succès")
-          //recharger les données
-          this.$refs.modalDismiss.click();
-          this.getData();
-          this.showAlertSuccess = true;
-          location.reload();
           //Fermer le modal
-          // alert("OKy")
+          this.$refs.modalDismiss.click();
+          //recharger les données
+          this.getData();
+
+          if (
+            Swal.fire({
+              icon: "success",
+              title: "Commune enregistrée avec success",
+              showConfirmButton: false,
+              timer: 2000,
+            })
+          ) {
+            setTimeout(function () {
+              location.reload();
+            }, 2000);
+          }
           this.formData.nom = " ";
           this.formData.superficie = " ";
           this.formData.geolocalisation = " ";
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "warning",
+            title: "Commune déjà existante",
+            showConfirmButton: true,
+          });
         });
     },
-    setEdit(id) {
+    setEdit(id, item) {
       this.idToEdit = id;
+      $("input[name=nom]").val(item.nom);
+      $("input[name=superficie]").val(item.superficie);
+      $("textarea[name=geolocalisation]").val(item.geolocalisation);
+    },
+    clearInput() {
+      $("input[name=nom]").val("");
+      $("input[name=superficie]").val("");
+      $("textarea[name=geolocalisation]").val("");
     },
     editForm() {
       let formData = new FormData(this.$refs.editCommuneForm);
@@ -401,7 +419,12 @@ export default {
           this.$refs.closeUpdate.click();
           this.idToEdit = null;
           this.getData();
-          this.showAlertSuccess = true;
+          Swal.fire({
+            icon: "success",
+            title: "Commune modifiée avec success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
           //Fermer le modal
           // alert("OKy")
           this.formData.nom = " ";
@@ -424,8 +447,18 @@ export default {
           //recharger les données
           this.$refs.closeUpdate.click();
           this.getData();
-          this.showAlertDelete = true;
-          //Fermer le modal
+          if (
+            Swal.fire({
+              icon: "success",
+              title: "Commune supprimée avec success",
+              showConfirmButton: false,
+              timer: 2000,
+            })
+          ) {
+            setTimeout(function () {
+              location.reload();
+            }, 2000);
+          } //Fermer le modal
           // alert("OKy")
         })
         .catch((err) => {
@@ -438,9 +471,15 @@ export default {
         .get("/communes")
         .then((res) => {
           this.items = res.data.data;
-          $(document).ready( function () {
-          $('#datatable').DataTable();
-            } );
+          $(document).ready(function () {
+            $("#datatable").DataTable({
+              destroy: true,
+              language: {
+                url:
+                  "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json",
+              },
+            });
+          });
         })
         .catch((err) => {
           console.log(err);
