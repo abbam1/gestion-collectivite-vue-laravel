@@ -133,9 +133,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Modifier un Site
-          </h5>
+          <h5 class="modal-title" id="exampleModalLabel">Modifier un Site</h5>
           <button
             type="button"
             class="btn-close text-dark"
@@ -225,9 +223,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Supprimer un site
-          </h5>
+          <h5 class="modal-title" id="exampleModalLabel">Supprimer un site</h5>
           <button
             type="button"
             class="btn-close text-dark"
@@ -276,9 +272,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Ajouter un Site
-          </h5>
+          <h5 class="modal-title" id="exampleModalLabel">Ajouter un Site</h5>
           <button
             type="button"
             class="btn-close text-dark"
@@ -424,7 +418,7 @@ export default {
           console.log(err);
           Swal.fire({
             icon: "warning",
-            title: "Site déjà existant",
+            title: `${err.response.data.message}`,
             showConfirmButton: true,
           });
         });
@@ -470,6 +464,11 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "warning",
+            title: `${err.response.data.message}`,
+            showConfirmButton: true,
+          });
         });
     },
     deleteItem() {
@@ -500,6 +499,11 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "warning",
+            title: `${err.response.data.message}`,
+            showConfirmButton: true,
+          });
         });
     },
 

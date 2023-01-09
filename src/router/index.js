@@ -8,10 +8,13 @@ import Rtl from "@/views/Rtl.vue";
 import SignIn from "@/views/SignIn.vue";
 import SignUp from "@/views/SignUp.vue";
 import Sites from "@/views/Sites.vue";
+import Biens from "@/views/Biens.vue";
 import Taxes from "@/views/Taxes.vue";
+import Structures from "@/views/Structures.vue";
+import Activites from "@/views/Activites.vue";
 import Contribuables from "@/views/Contribuables.vue";
 import Recensements from "@/views/Recensements.vue";
-import CartesContribuables from "@/views/CartesContribuables.vue";
+import Utilisateurs from "@/views/Utilisateurs.vue";
 import ComptesTaxes from "@/views/ComptesTaxes.vue";
 import Communes from "@/views/Communes.vue";
 import CommuneShow from "@/views/CommuneShow";
@@ -88,15 +91,30 @@ const routes = [
     component: Recensements,
   },
   {
-    path: "/cartesContribuables",
-    name: "CartesContribuables",
-    component: CartesContribuables,
+    path: "/utilisateurs",
+    name: "Utilisateurs",
+    component: Utilisateurs,
   },
   
   {
     path: "/communes",
     name: "Communes",
     component: Communes,
+  },
+  {
+    path: "/structures",
+    name: "Structures",
+    component: Structures,
+  },
+  {
+    path: "/activites",
+    name: "Activites",
+    component: Activites,
+  },
+  {
+    path: "/biens",
+    name: "Biens",
+    component: Biens,
   },
   {
     path: "/communeshow:id",

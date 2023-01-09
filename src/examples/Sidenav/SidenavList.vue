@@ -27,7 +27,21 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
+        <sidenav-collapse navText="Activités" :to="{ name: 'Activites' }">
+          <template #icon>
+            <office />
+          </template>
+        </sidenav-collapse>
+      </li>
+      <li class="nav-item">
         <sidenav-collapse navText="Communes" :to="{ name: 'Communes' }">
+          <template #icon>
+            <office />
+          </template>
+        </sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse navText="Structures" :to="{ name: 'Structures' }">
           <template #icon>
             <office />
           </template>
@@ -40,13 +54,13 @@
           </template>
         </sidenav-collapse>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <sidenav-collapse navText="Contribuables" :to="{ name: 'Contribuables' }">
           <template #icon>
             <office />
           </template>
         </sidenav-collapse>
-      </li>
+      </li> -->
       <li class="nav-item">
         <sidenav-collapse navText="Comptes-Taxes" :to="{ name: 'ComptesTaxes' }">
           <template #icon>
@@ -55,12 +69,12 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse navText="Recensements" :to="{ name: 'Recensements' }">
+        <sidenav-collapse navText="Biens" :to="{ name: 'Biens' }">
           <template #icon>
             <office />
           </template>
         </sidenav-collapse>
-      </li>
+      </li> 
       <li class="mt-3 nav-item">
         <h6
           class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6"
@@ -70,7 +84,7 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-collapse navText="Cartes-Contribuables" :to="{ name: 'CartesContribuables' }">
+        <sidenav-collapse navText="Utilisateurs" :to="{ name: 'Utilisateurs' }">
           <template #icon>
             <office />
           </template>

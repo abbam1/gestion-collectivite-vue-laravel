@@ -3,9 +3,10 @@
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
         ><strong
-          >Bienvenue sur l'espace de gestion des communes, vous pouvez</strong
+          >Bienvenue sur l'espace de gestion des utilisateurs, vous
+          pouvez</strong
         >
-        <strong> Ajouter, modifier ou Supprimer une commune</strong>
+        <strong> Ajouter, modifier ou Supprimer un utilisateur </strong>
       </span>
     </div>
 
@@ -15,7 +16,7 @@
           <div class="card-header pb-0">
             <div class="d-flex flex-row justify-content-between">
               <div>
-                <h5 class="mb-0">Toutes les communes</h5>
+                <h5 class="mb-0">Tous les utilisateurs</h5>
               </div>
               <!-- Button trigger modal -->
               <button
@@ -25,7 +26,7 @@
                 data-bs-target="#exampleModalMessage"
                 @click="clearInput()"
               >
-                +&nbsp; Ajouter une commune
+                +&nbsp; Ajouter un utilisateur
               </button>
               <!-- Button trigger modal -->
             </div>
@@ -43,12 +44,47 @@
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Superficie
+                      Prénoms
                     </th>
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Geolocalisation
+                      Matricule
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Email
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Tel
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Password
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      password_confirmation
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Poste
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      ID Commune
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Role
                     </th>
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -58,7 +94,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in items" :key="'commune_' + item.id">
+                  <tr v-for="item in items" :key="'user_' + item.id">
                     <td class="ps-4">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.nom }}
@@ -66,13 +102,48 @@
                     </td>
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.superficie }}
+                        {{ item.prenoms }}
                       </p>
                     </td>
                     <td class="text-center">
-                      <span class="text-xs font-weight-bold mb-0">{{
-                        item.geolocalisation
-                      }}</span>
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.matricule }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.email }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.contacts }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.password }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.password_confirmation }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.post }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.commune_id }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.role }}
+                      </p>
                     </td>
                     <td class="text-center">
                       <!-- Button trigger modal -->
@@ -124,7 +195,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Modifier une commune
+            Modifier un utilisateur
           </h5>
           <button
             type="button"
@@ -136,7 +207,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form ref="editCommuneForm" @submit.prevent="editForm">
+          <form ref="editUsersForm" @submit.prevent="editForm">
             <input type="hidden" name="_method" value="put" />
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
@@ -149,24 +220,103 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Superficie:</label
+                >Prénoms:</label
               >
               <input
                 type="text"
                 class="form-control"
-                name="superficie"
+                name="prenoms"
                 id="recipient-name"
               />
             </div>
             <div class="form-group">
-              <label for="message-text" class="col-form-label"
-                >Geolocalisation:</label
+              <label for="recipient-name" class="col-form-label"
+                >Matricule:</label
               >
-              <textarea
+              <input
+                type="text"
                 class="form-control"
-                id="message-text"
-                name="geolocalisation"
-              ></textarea>
+                name="matricule"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Email:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="email"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Tel:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="contacts"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >Password:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="password"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >password_confirmation:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="password_confirmation"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Poste:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="post"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Poste:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="poste"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >ID Commune:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="commune_id"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Rôle:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="role"
+                id="recipient-name"
+              />
             </div>
             <div class="modal-footer">
               <button
@@ -205,7 +355,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Supprimer une commune
+            Supprimer un utilisateur
           </h5>
           <button
             type="button"
@@ -218,7 +368,7 @@
         </div>
         <div class="modal-body">
           <h5 class="modal-title" id="exampleModalLabel">
-            Êtes-vous sûr de vouloir supprimer cette commune?
+            Êtes-vous sûr de vouloir supprimer cet utilisateur?
           </h5>
           <div class="modal-footer">
             <button
@@ -256,7 +406,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Ajouter une commune
+            Ajouter un utilisateur
           </h5>
           <button
             type="button"
@@ -268,12 +418,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <form ref="addCommuneForm" @submit.prevent="addForm">
+          <form ref="addUsersForm" @submit.prevent="addForm">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
               <input
-                type="text"
                 v-model="formData.nom"
+                type="text"
                 class="form-control"
                 name="nom"
                 id="recipient-name"
@@ -281,26 +431,67 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Superficie:</label
+                >Prénoms:</label
               >
               <input
+                v-model="formData.prenoms"
                 type="text"
-                v-model="formData.superficie"
                 class="form-control"
-                name="superficie"
+                name="prenoms"
                 id="recipient-name"
               />
             </div>
             <div class="form-group">
-              <label for="message-text" class="col-form-label"
-                >Geolocalisation:</label
-              >
-              <textarea
+              <label for="recipient-name" class="col-form-label">Tel:</label>
+              <input
+                v-model="formData.contacts"
+                type="text"
                 class="form-control"
-                v-model="formData.geolocalisation"
-                id="message-text"
-                name="geolocalisation"
-              ></textarea>
+                name="contacts"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Email:</label>
+              <input
+                v-model="formData.email"
+                type="text"
+                class="form-control"
+                name="email"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Poste:</label>
+              <input
+                v-model="formData.passsword"
+                type="text"
+                class="form-control"
+                name="poste"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Rôle:</label>
+              <input
+                v-model="formData.role"
+                type="text"
+                class="form-control"
+                name="role"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >Matricule:</label
+              >
+              <input
+                v-model="formData.commune_id"
+                type="text"
+                class="form-control"
+                name="matricule"
+                id="recipient-name"
+              />
             </div>
             <div class="modal-footer">
               <button
@@ -343,12 +534,12 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import Swal from "sweetalert2";
 
 export default {
-  name: "communesTable",
+  name: "utilisateursTable",
 
   components: {},
   data() {
     return {
-      url: "/communes",
+      url: "/users",
       showAlertSuccess: false,
       idToEdit: null,
       items: [],
@@ -357,10 +548,10 @@ export default {
   },
   methods: {
     addForm() {
-      let formData = new FormData(this.$refs.addCommuneForm);
+      let formData = new FormData(this.$refs.addUsersForm);
 
       this.$axios
-        .post("/communes", formData)
+        .post("/users", formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -373,7 +564,7 @@ export default {
           if (
             Swal.fire({
               icon: "success",
-              title: "Commune enregistrée avec success",
+              title: "Utilisateur Créé avec success",
               showConfirmButton: false,
               timer: 2000,
             })
@@ -383,14 +574,18 @@ export default {
             }, 2000);
           }
           this.formData.nom = " ";
-          this.formData.superficie = " ";
-          this.formData.geolocalisation = " ";
+          this.formData.prenoms = " ";
+          this.formData.contacts = " ";
+          this.formData.email = " ";
+          this.formData.poste = " ";
+          this.formData.role = " ";
+          this.formData.matricule = " ";
         })
         .catch((err) => {
           console.log(err);
           Swal.fire({
             icon: "warning",
-            title: "Commune déjà existante",
+            title: `${err.response.data.message}`,
             showConfirmButton: true,
           });
         });
@@ -398,19 +593,27 @@ export default {
     setEdit(id, item) {
       this.idToEdit = id;
       $("input[name=nom]").val(item.nom);
-      $("input[name=superficie]").val(item.superficie);
-      $("textarea[name=geolocalisation]").val(item.geolocalisation);
+      $("input[name=prenoms]").val(item.prenoms);
+      $("input[name=contacts]").val(item.contacts);
+      $("input[name=email]").val(item.email);
+      $("input[name=poste]").val(item.poste);
+      $("input[name=role]").val(item.role);
+      $("input[name=matricule]").val(item.matricule);
     },
     clearInput() {
       $("input[name=nom]").val("");
-      $("input[name=superficie]").val("");
-      $("textarea[name=geolocalisation]").val("");
+      $("input[name=prenoms]").val("");
+      $("input[name=contacts]").val("");
+      $("input[name=email]").val("");
+      $("input[name=poste]").val("");
+      $("input[name=role]").val("");
+      $("input[name=matricule]").val("");
     },
     editForm() {
-      let formData = new FormData(this.$refs.editCommuneForm);
+      let formData = new FormData(this.$refs.editUsersForm);
 
       this.$axios
-        .post("/communes/" + this.idToEdit, formData)
+        .post("/users/" + this.idToEdit, formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -421,25 +624,29 @@ export default {
           this.getData();
           Swal.fire({
             icon: "success",
-            title: "Commune modifiée avec success",
+            title: "Utilisateur modifié avec success",
             showConfirmButton: false,
             timer: 2000,
           });
           //Fermer le modal
           // alert("OKy")
           this.formData.nom = " ";
-          this.formData.superficie = " ";
-          this.formData.geolocalisation = " ";
+          this.formData.prenoms = " ";
+          this.formData.contacts = " ";
+          this.formData.email = " ";
+          this.formData.poste = " ";
+          this.formData.role = " ";
+          this.formData.matricule = " ";
         })
         .catch((err) => {
           console.log(err);
         });
     },
     deleteItem() {
-      // let formData = new FormData(this.$refs.editCommuneForm);
+      // let formData = new FormData(this.$refs.editUsersForm);
 
       this.$axios
-        .delete("/communes/" + this.idToEdit)
+        .delete("/users/" + this.idToEdit)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -450,7 +657,7 @@ export default {
           if (
             Swal.fire({
               icon: "success",
-              title: "Commune supprimée avec success",
+              title: "Utilisateur supprimé avec success",
               showConfirmButton: false,
               timer: 2000,
             })
@@ -458,7 +665,7 @@ export default {
             setTimeout(function () {
               location.reload();
             }, 2000);
-          } 
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -467,7 +674,7 @@ export default {
 
     async getData() {
       this.$axios
-        .get("/communes")
+        .get("/users")
         .then((res) => {
           this.items = res.data.data;
           $(document).ready(function () {

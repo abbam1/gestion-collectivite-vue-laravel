@@ -205,7 +205,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Supprimer une commune
+            Supprimer un compte-taxe
           </h5>
           <button
             type="button"
@@ -218,7 +218,7 @@
         </div>
         <div class="modal-body">
           <h5 class="modal-title" id="exampleModalLabel">
-            Êtes-vous sûr de vouloir supprimer cette commune?
+            Êtes-vous sûr de vouloir supprimer ce compte-taxe?
           </h5>
           <div class="modal-footer">
             <button

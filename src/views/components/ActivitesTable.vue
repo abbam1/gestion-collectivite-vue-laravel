@@ -3,9 +3,9 @@
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
         ><strong
-          >Bienvenue sur l'espace de gestion des communes, vous pouvez</strong
+          >Bienvenue sur l'espace de gestion des Activités, vous pouvez</strong
         >
-        <strong> Ajouter, modifier ou Supprimer une commune</strong>
+        <strong> Ajouter, modifier ou Supprimer une Activité</strong>
       </span>
     </div>
 
@@ -15,7 +15,7 @@
           <div class="card-header pb-0">
             <div class="d-flex flex-row justify-content-between">
               <div>
-                <h5 class="mb-0">Toutes les communes</h5>
+                <h5 class="mb-0">Toutes les Activités</h5>
               </div>
               <!-- Button trigger modal -->
               <button
@@ -25,7 +25,7 @@
                 data-bs-target="#exampleModalMessage"
                 @click="clearInput()"
               >
-                +&nbsp; Ajouter une commune
+                +&nbsp; Ajouter une Activité
               </button>
               <!-- Button trigger modal -->
             </div>
@@ -43,12 +43,7 @@
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Superficie
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Geolocalisation
+                      Description
                     </th>
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -58,7 +53,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in items" :key="'commune_' + item.id">
+                  <tr v-for="item in items" :key="'activite_' + item.id">
                     <td class="ps-4">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.nom }}
@@ -66,13 +61,8 @@
                     </td>
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.superficie }}
+                        {{ item.description }}
                       </p>
-                    </td>
-                    <td class="text-center">
-                      <span class="text-xs font-weight-bold mb-0">{{
-                        item.geolocalisation
-                      }}</span>
                     </td>
                     <td class="text-center">
                       <!-- Button trigger modal -->
@@ -124,7 +114,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Modifier une commune
+            Modifier une Activité
           </h5>
           <button
             type="button"
@@ -136,7 +126,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form ref="editCommuneForm" @submit.prevent="editForm">
+        <form ref="editActivitesForm" @submit.prevent="editForm">
             <input type="hidden" name="_method" value="put" />
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
@@ -148,24 +138,13 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Superficie:</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="superficie"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
               <label for="message-text" class="col-form-label"
-                >Geolocalisation:</label
+                >Description:</label
               >
               <textarea
                 class="form-control"
                 id="message-text"
-                name="geolocalisation"
+                name="description"
               ></textarea>
             </div>
             <div class="modal-footer">
@@ -205,7 +184,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Supprimer une commune
+            Supprimer une activité
           </h5>
           <button
             type="button"
@@ -218,7 +197,7 @@
         </div>
         <div class="modal-body">
           <h5 class="modal-title" id="exampleModalLabel">
-            Êtes-vous sûr de vouloir supprimer cette commune?
+            Êtes-vous sûr de vouloir supprimer cette activité?
           </h5>
           <div class="modal-footer">
             <button
@@ -256,7 +235,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Ajouter une commune
+            Ajouter une activité
           </h5>
           <button
             type="button"
@@ -268,7 +247,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form ref="addCommuneForm" @submit.prevent="addForm">
+          <form ref="addActivitesForm" @submit.prevent="addForm">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
               <input
@@ -280,26 +259,14 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Superficie:</label
-              >
-              <input
-                type="text"
-                v-model="formData.superficie"
-                class="form-control"
-                name="superficie"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
               <label for="message-text" class="col-form-label"
-                >Geolocalisation:</label
+                >Description:</label
               >
               <textarea
                 class="form-control"
-                v-model="formData.geolocalisation"
+                v-model="formData.description"
                 id="message-text"
-                name="geolocalisation"
+                name="description"
               ></textarea>
             </div>
             <div class="modal-footer">
@@ -343,12 +310,12 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import Swal from "sweetalert2";
 
 export default {
-  name: "communesTable",
+  name: "activitesTable",
 
   components: {},
   data() {
     return {
-      url: "/communes",
+      url: "/activites",
       showAlertSuccess: false,
       idToEdit: null,
       items: [],
@@ -357,10 +324,10 @@ export default {
   },
   methods: {
     addForm() {
-      let formData = new FormData(this.$refs.addCommuneForm);
+      let formData = new FormData(this.$refs.addActivitesForm);
 
       this.$axios
-        .post("/communes", formData)
+        .post("/activites", formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -373,7 +340,7 @@ export default {
           if (
             Swal.fire({
               icon: "success",
-              title: "Commune enregistrée avec success",
+              title: "Activité enregistrée avec success",
               showConfirmButton: false,
               timer: 2000,
             })
@@ -383,14 +350,13 @@ export default {
             }, 2000);
           }
           this.formData.nom = " ";
-          this.formData.superficie = " ";
-          this.formData.geolocalisation = " ";
+          this.formData.description = " ";
         })
         .catch((err) => {
           console.log(err);
           Swal.fire({
             icon: "warning",
-            title: "Commune déjà existante",
+            title: "Activité déjà existante",
             showConfirmButton: true,
           });
         });
@@ -398,19 +364,17 @@ export default {
     setEdit(id, item) {
       this.idToEdit = id;
       $("input[name=nom]").val(item.nom);
-      $("input[name=superficie]").val(item.superficie);
-      $("textarea[name=geolocalisation]").val(item.geolocalisation);
+      $("textarea[name=description]").val(item.description);
     },
     clearInput() {
       $("input[name=nom]").val("");
-      $("input[name=superficie]").val("");
-      $("textarea[name=geolocalisation]").val("");
+      $("textarea[name=description]").val("");
     },
     editForm() {
-      let formData = new FormData(this.$refs.editCommuneForm);
+    let formData = new FormData(this.$refs.editActivitesForm);
 
       this.$axios
-        .post("/communes/" + this.idToEdit, formData)
+        .post("/activites/" + this.idToEdit, formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -421,25 +385,24 @@ export default {
           this.getData();
           Swal.fire({
             icon: "success",
-            title: "Commune modifiée avec success",
+            title: "Activité modifiée avec success",
             showConfirmButton: false,
             timer: 2000,
           });
           //Fermer le modal
           // alert("OKy")
           this.formData.nom = " ";
-          this.formData.superficie = " ";
-          this.formData.geolocalisation = " ";
+          this.formData.description = " ";
         })
         .catch((err) => {
           console.log(err);
         });
     },
     deleteItem() {
-      // let formData = new FormData(this.$refs.editCommuneForm);
+    // let formData = new FormData(this.$refs.editActivitesForm);
 
       this.$axios
-        .delete("/communes/" + this.idToEdit)
+        .delete("/activites/" + this.idToEdit)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -450,7 +413,7 @@ export default {
           if (
             Swal.fire({
               icon: "success",
-              title: "Commune supprimée avec success",
+              title: "Activité supprimée avec success",
               showConfirmButton: false,
               timer: 2000,
             })
@@ -467,7 +430,7 @@ export default {
 
     async getData() {
       this.$axios
-        .get("/communes")
+        .get("/activites")
         .then((res) => {
           this.items = res.data.data;
           $(document).ready(function () {

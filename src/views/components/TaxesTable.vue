@@ -390,6 +390,7 @@
                   >Fréquence:</label
                 >
                 <input
+                  placeholder="Ex:1-10"
                   type="text"
                   v-model="formData.frequence"
                   class="form-control"
@@ -414,7 +415,7 @@
                   >ID Compte-Taxe:</label
                 >
                 <input
-                placeholder="Ex:2"
+                placeholder="Ex:1-10"
                   type="text"
                   v-model="formData.compte_taxe_id"
                   class="form-control"
@@ -427,7 +428,7 @@
                   >ID Commune:</label
                 >
                 <input
-                  placeholder="Ex:1"
+                  placeholder="Ex:1-10"
                   type="text"
                   v-model="formData.commune_id"
                   class="form-control"
