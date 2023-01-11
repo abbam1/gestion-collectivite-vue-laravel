@@ -38,11 +38,6 @@
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      ID
-                    </th>
-                    <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
                       Nom
                     </th>
                     <th
@@ -64,11 +59,6 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in items" :key="'commune_' + item.id">
-                    <td class="ps-4">
-                      <p class="text-xs font-weight-bold mb-0">
-                        {{ item.id }}
-                      </p>
-                    </td>
                     <td class="ps-4">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.nom }}

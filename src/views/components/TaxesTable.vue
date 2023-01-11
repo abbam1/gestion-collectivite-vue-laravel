@@ -55,7 +55,7 @@
                     >
                       Montant par defaut
                     </th>
-                    <th
+                    <!-- <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       ID Compte-taxe
@@ -64,7 +64,7 @@
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       ID Commune
-                    </th>
+                    </th> -->
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
@@ -99,7 +99,7 @@
                         {{ item.montant_defaut }}
                       </p>
                     </td>
-                    <td class="text-center">
+                    <!-- <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.compte_taxe_id }}
                       </p>
@@ -108,7 +108,7 @@
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.commune_id }}
                       </p>
-                    </td>
+                    </td> -->
                     <td class="text-center">
                       <span class="text-xs font-weight-bold mb-0">
                         {{ item.description }}

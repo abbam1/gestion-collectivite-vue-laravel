@@ -80,12 +80,12 @@
                     >
                       Fonction
                     </th> -->
-                    <th
+                    <!-- <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       ID Contribuable
-                    </th>
-                    <th
+                    </th> -->
+                    <!-- <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       ID Site
@@ -94,7 +94,7 @@
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       ID Activité
-                    </th>
+                    </th> -->
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
@@ -149,12 +149,12 @@
                         {{ item.fonction }}
                       </p>
                     </td> -->
-                    <td class="text-center">
+                    <!-- <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.contribuable_id }}
                       </p>
-                    </td>
-                    <td class="text-center">
+                    </td> -->
+                    <!-- <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.site_id }}
                       </p>
@@ -163,7 +163,7 @@
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.activite_id }}
                       </p>
-                    </td>
+                    </td> -->
                     <td class="text-center">
                       <!-- Button trigger modal -->
                       <button

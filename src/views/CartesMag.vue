@@ -2,8 +2,7 @@
   <div class="py-4 container-fluid">
     <div class="row">
       <div class="col-12">
-
-
+        <CartesTable1 />
       </div>
     </div>
   </div>
@@ -11,12 +10,13 @@
 
 <script>
 
-// import CommunesTable from "./components/CommunesTable";
+import CartesTable1 from "./components/CartesTable1.vue";
 
 export default {
-  name: "CommuneShow",
+  name: "CartesMag",
   components: {
-  },
+    CartesTable1,
+},
 };
 
 

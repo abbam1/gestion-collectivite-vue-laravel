@@ -14,7 +14,7 @@
       <div class="mx-auto col-xl-4 col-lg-5 col-md-7">
         <div class="card z-index-0">
           <div class="pt-4 text-center card-header">
-            <h5>Enregistrez vous</h5>
+            <h5>Enregistrez-vous</h5>
           </div>
           <div class="d-flex justify-content-center">
             
@@ -63,21 +63,31 @@
                   aria-label="Tel"
                 />
               </div>
-              <div class="mb-3">
-                <soft-input
+              <div class="mb-3 d-flex">
+                <input
+                  class="form-control"
                   name="password"
-                  type="password"
+                  :type="showPwd ? 'text' : 'password'"
                   placeholder="Mot de passe"
                   aria-label="Password"
                 />
+                <span
+                  class="fa fa-fw fa-eye field-icon toggle-password"
+                  @click="showPwd = !showPwd"
+                ></span>
               </div>
-              <div class="mb-3">
-                <soft-input
+              <div class="mb-3 d-flex">
+                <input
+                class="form-control"
                   name="password_confirmation"
-                  type="password"
+                  :type="showPwd ? 'text' : 'password'"
                   placeholder="Confirmer le Mot de passe"
                   aria-label="Password"
                 />
+                <span
+                  class="fa fa-fw fa-eye field-icon toggle-password"
+                  @click="showPwd = !showPwd"
+                ></span>
               </div>
               
               <div class="text-center">
@@ -125,8 +135,8 @@ export default {
   },
   data(){
     return {
-      
-    }
+      showPwd: false,
+    };
   },
   computed:{
     ...mapState(['axios'])

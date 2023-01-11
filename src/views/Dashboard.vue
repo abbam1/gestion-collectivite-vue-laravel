@@ -106,97 +106,93 @@
         </div>
       </div>
     </div>
-<br/>
-<br/>
-              <div>
-                <h5 class="mb-0">Les dernieres Taxes assignés</h5>
-              </div>
-<br/>
+    <br />
+    <br />
+    <div>
+      <h5 class="mb-0">Les dernieres Taxes assignés</h5>
+    </div>
+    <br />
     <div class="card px-0 pt-0 pb-2">
-      
       <div class="table-responsive p-0">
-        
-        
         <table class="table align-items-center mb-0">
-          
           <thead>
-                  <tr>
-                    <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Nom
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Période
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Fréquence
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Montant par defaut
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      ID Compte-taxe
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      ID Commune
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Description
-                  </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in items" :key="'taxe_' + item.id">
-                    <td class="ps-4">
-                      <p class="text-xs font-weight-bold mb-0">
-                        {{ item.nom }}
-                      </p>
-                    </td>
-                    <td class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">
-                        {{ item.periode }}
-                      </p>
-                    </td>
-                    <td class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">
-                        {{ item.frequence }}
-                      </p>
-                    </td>
-                    <td class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">
-                        {{ item.montant_defaut }}
-                      </p>
-                    </td>
-                    <td class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">
-                        {{ item.compte_taxe_id }}
-                      </p>
-                    </td>
-                    <td class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">
-                        {{ item.commune_id }}
-                      </p>
-                    </td>
-                    <td class="text-center">
-                      <span class="text-xs font-weight-bold mb-0">
-                        {{ item.description }}
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
+            <tr>
+              <th
+                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+              >
+                Nom
+              </th>
+              <th
+                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+              >
+                Période
+              </th>
+              <th
+                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+              >
+                Fréquence
+              </th>
+              <th
+                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+              >
+                Montant par defaut
+              </th>
+              <th
+                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+              >
+                ID Compte-taxe
+              </th>
+              <th
+                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+              >
+                ID Commune
+              </th>
+              <th
+                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+              >
+                Description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in items" :key="'taxe_' + item.id">
+              <td class="ps-4">
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ item.nom }}
+                </p>
+              </td>
+              <td class="text-center">
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ item.periode }}
+                </p>
+              </td>
+              <td class="text-center">
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ item.frequence }}
+                </p>
+              </td>
+              <td class="text-center">
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ item.montant_defaut }}
+                </p>
+              </td>
+              <td class="text-center">
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ item.compte_taxe_id }}
+                </p>
+              </td>
+              <td class="text-center">
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ item.commune_id }}
+                </p>
+              </td>
+              <td class="text-center">
+                <span class="text-xs font-weight-bold mb-0">
+                  {{ item.description }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -204,16 +200,13 @@
 </template>
 <script>
 import MiniStatisticsCard from "@/examples/Cards/MiniStatisticsCard.vue";
-import US from "../assets/img/icons/flags/US.png";
-import DE from "../assets/img/icons/flags/DE.png";
-import GB from "../assets/img/icons/flags/GB.png";
-import BR from "../assets/img/icons/flags/BR.png";
+
 import {
-  faHandPointer,
   faUsers,
   faCreditCard,
   faScrewdriverWrench,
 } from "@fortawesome/free-solid-svg-icons";
+
 export default {
   name: "dashboard-default",
   data() {
@@ -225,47 +218,15 @@ export default {
       faCreditCard,
       faScrewdriverWrench,
       faUsers,
-      faHandPointer,
-      sales: {
-        us: {
-          country: "United States",
-          sales: 2500,
-          value: "$230,900",
-          bounce: "29.9%",
-          flag: US,
-        },
-        germany: {
-          country: "Germany",
-          sales: "3.900",
-          value: "$440,000",
-          bounce: "40.22%",
-          flag: DE,
-        },
-        britain: {
-          country: "Great Britain",
-          sales: "1.400",
-          value: "$190,700",
-          bounce: "23.44%",
-          flag: GB,
-        },
-        brasil: {
-          country: "Brasil",
-          sales: "562",
-          value: "$143,960",
-          bounce: "32.14%",
-          flag: BR,
-        },
-      },
     };
   },
+
   components: {
     MiniStatisticsCard,
   },
 
-
-methods:{
-
-  async getData() {
+  methods: {
+    async getData() {
       this.$axios
         .get("/taxes")
         .then((res) => {
@@ -275,13 +236,11 @@ methods:{
           console.log(err);
         });
     },
-
-},
-
-created() {
-    this.getData();
-  
   },
 
+  created() {
+    this.getData();
+  },
+  
 };
 </script>
