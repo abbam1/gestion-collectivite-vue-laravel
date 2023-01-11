@@ -181,11 +181,16 @@
               <label for="message-text" class="col-form-label"
                 >ID commune:</label
               >
-              <textarea
-                class="form-control"
-                id="message-text"
-                name="commune_id"
-              ></textarea>
+              <select name="commune_id" class="form-control">
+                <option value="">Choississez l'ID<ion-icon name="caret-down"></ion-icon></option>
+                <option
+                  v-for="item in listCommunes"
+                  :key="'commune_' + item.id"
+                  :value="item.id"
+                >
+                  {{ item.nom }}
+                </option>
+              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -322,12 +327,20 @@
               <label for="message-text" class="col-form-label"
                 >ID commune:</label
               >
-              <textarea
+              <select
+                name="commune_id"
                 class="form-control"
                 v-model="formData.commune_id"
-                id="message-text"
-                name="commune_id"
-              ></textarea>
+              >
+                <option value="">Choississez l'ID ⇩</option>
+                <option
+                  v-for="item in listCommunes"
+                  :key="'commune_' + item.id"
+                  :value="item.id"
+                >
+                  {{ item.nom }}
+                </option>
+              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -378,6 +391,7 @@ export default {
       url: "/sites",
       showAlertSuccess: false,
       idToEdit: null,
+      listCommunes: [],
       items: [],
       formData: {},
     };
@@ -428,13 +442,13 @@ export default {
       $("input[name=nom]").val(item.nom);
       $("input[name=description]").val(item.description);
       $("input[name=geolocalisation]").val(item.geolocalisation);
-      $("textarea[name=commune_id]").val(item.commune_id);
+      $("select[name=commune_id]").val(item.commune_id);
     },
     clearInput() {
       $("input[name=nom]").val("");
       $("input[name=description]").val("");
       $("input[name=geolocalisation]").val("");
-      $("textarea[name=commune_id]").val("");
+      $("select[name=commune_id]").val("");
     },
     editForm() {
       let formData = new FormData(this.$refs.editSitesForm);
@@ -526,10 +540,26 @@ export default {
           console.log(err);
         });
     },
+
+     // Recupération des communes
+     getCommunes() {
+      this.$axios
+        .get("/communes")
+        .then((res) => {
+          this.listCommunes = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // Recupération des communes
+
+
   },
 
   created() {
     this.getData();
+    this.getCommunes();
   },
 };
 </script>

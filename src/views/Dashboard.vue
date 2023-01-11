@@ -54,12 +54,13 @@
             <div class="row">
               <div class="col-lg-6">
                 <div class="d-flex flex-column h-100">
-                  <p class="mb-1 pt-2 text-bold">CHER MANAGER</p>
-                  <h5 class="font-weight-bolder">Bienvenue sur notre plateforme</h5>
+                  <h5 class="font-weight-bolder">
+                    Bienvenue sur notre plateforme
+                  </h5>
                   <p class="mb-5">
-                    Ici vous pourrez gerer les collectivités, les taxes , contribuables , sites etc...
+                    Ici vous pourrez gerer les collectivités, les taxes ,
+                    contribuables , sites etc...
                   </p>
-                  
                 </div>
               </div>
               <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
@@ -88,7 +89,6 @@
         <div class="card h-100 p-3">
           <div
             class="overflow-hidden position-relative border-radius-lg bg-cover h-100"
-            
           >
             <span class="mask bg-gradient-dark"></span>
             <div class="card-body position-relative z-index-1 p-3 h-100">
@@ -97,26 +97,113 @@
                   Préocupations
                 </h5>
                 <p class="text-white mb-5">
-Pour toutes preocupations veuillez envoyez un email à  <a href="mailto:cnit@tresor.gouv.ci ">cnit@tresor.gouv.ci </a> </p>
-              
+                  Pour toutes preocupations veuillez envoyez un email à
+                  <a href="mailto:cnit@tresor.gouv.ci ">cnit@tresor.gouv.ci </a>
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <div class="row my-4">
-      <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
-        <projects-card />
-      </div>
+<br/>
+<br/>
+              <div>
+                <h5 class="mb-0">Les dernieres Taxes assignés</h5>
+              </div>
+<br/>
+    <div class="card px-0 pt-0 pb-2">
       
+      <div class="table-responsive p-0">
+        
+        
+        <table class="table align-items-center mb-0">
+          
+          <thead>
+                  <tr>
+                    <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Nom
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Période
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Fréquence
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Montant par defaut
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      ID Compte-taxe
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      ID Commune
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Description
+                  </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in items" :key="'taxe_' + item.id">
+                    <td class="ps-4">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.nom }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.periode }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.frequence }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.montant_defaut }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.compte_taxe_id }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.commune_id }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <span class="text-xs font-weight-bold mb-0">
+                        {{ item.description }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import MiniStatisticsCard from "@/examples/Cards/MiniStatisticsCard.vue";
-import ProjectsCard from "./components/ProjectsCard.vue";
 import US from "../assets/img/icons/flags/US.png";
 import DE from "../assets/img/icons/flags/DE.png";
 import GB from "../assets/img/icons/flags/GB.png";
@@ -131,6 +218,9 @@ export default {
   name: "dashboard-default",
   data() {
     return {
+      url: "/taxes",
+      items: [],
+      formData: {},
       iconBackground: "bg-gradient-success",
       faCreditCard,
       faScrewdriverWrench,
@@ -170,9 +260,28 @@ export default {
   },
   components: {
     MiniStatisticsCard,
-    ProjectsCard,
   },
 
+
+methods:{
+
+  async getData() {
+      this.$axios
+        .get("/taxes")
+        .then((res) => {
+          this.items = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+},
+
+created() {
+    this.getData();
   
+  },
+
 };
 </script>

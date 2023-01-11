@@ -183,12 +183,19 @@
               <label for="recipient-name" class="col-form-label"
                 >ID Commune:</label
               >
-              <input
-                type="text"
-                class="form-control"
+              <select
                 name="commune_id"
-                id="recipient-name"
-              />
+                class="form-control"
+              >
+                <option value="" selected>Choississez l'id</option>
+                <option
+                  v-for="item in listCommunes"
+                  :key="'commune_' + item.id"
+                  :value="item.id"
+                >
+                  {{ item.nom }}
+                </option>
+              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -329,13 +336,20 @@
               <label for="recipient-name" class="col-form-label"
                 >ID Commune:</label
               >
-              <input
-                type="text"
-                v-model="formData.commune_id"
-                class="form-control"
+              <select
                 name="commune_id"
-                id="recipient-name"
-              />
+                class="form-control"
+                v-model="formData.commune_id"
+              >
+                <option value="" selected>Choississez l'id</option>
+                <option
+                  v-for="item in listCommunes"
+                  :key="'commune_' + item.id"
+                  :value="item.id"
+                >
+                  {{ item.nom }}
+                </option>
+              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -387,6 +401,7 @@ export default {
       showAlertSuccess: false,
       idToEdit: null,
       items: [],
+      listCommunes: [],
       formData: {},
     };
   },
@@ -523,10 +538,26 @@ export default {
           console.log(err);
         });
     },
+
+// Recupération des communes
+getCommunes() {
+      this.$axios
+        .get("/communes")
+        .then((res) => {
+          this.listCommunes = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // Recupération des communes
+
+
   },
 
   created() {
     this.getData();
+    this.getCommunes();
   },
 };
 </script>

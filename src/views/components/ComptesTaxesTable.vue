@@ -162,11 +162,20 @@
               <label for="message-text" class="col-form-label"
                 >ID commune:</label
               >
-              <textarea
-                class="form-control"
-                id="message-text"
+              <select
                 name="commune_id"
-              ></textarea>
+                class="form-control"
+                
+              >
+                <option value="" selected>Choississez l'id</option>
+                <option
+                  v-for="item in listCommunes"
+                  :key="'commune_' + item.id"
+                  :value="item.id"
+                >
+                  {{ item.nom }}
+                </option>
+              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -295,12 +304,20 @@
               <label for="message-text" class="col-form-label"
                 >ID commune:</label
               >
-              <textarea
+              <select
+                name="commune_id"
                 class="form-control"
                 v-model="formData.commune_id"
-                id="message-text"
-                name="commune_id"
-              ></textarea>
+              >
+                <option value="" selected>Choississez l'id</option>
+                <option
+                  v-for="item in listCommunes"
+                  :key="'commune_' + item.id"
+                  :value="item.id"
+                >
+                  {{ item.nom }}
+                </option>
+              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -352,6 +369,7 @@ export default {
       showAlertSuccess: false,
       idToEdit: null,
       items: [],
+      listCommunes: [],
       formData: {},
     };
   },
@@ -399,12 +417,12 @@ export default {
       this.idToEdit = id;
       $("input[name=nom]").val(item.nom);
       $("input[name=code]").val(item.code);
-      $("textarea[name=commune_id]").val(item.commune_id);
+      $("select[name=commune_id]").val(item.commune_id);
     },
     clearInput() {
       $("input[name=nom]").val("");
       $("input[name=code]").val("");
-      $("textarea[name=commune_id]").val("");
+      $("select[name=commune_id]").val("");
     },
     editForm() {
       let formData = new FormData(this.$refs.editCompteTaxesForm);
@@ -485,10 +503,26 @@ export default {
           console.log(err);
         });
     },
+// Recupération des communes
+    getCommunes() {
+      this.$axios
+        .get("/communes")
+        .then((res) => {
+          this.listCommunes = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // Recupération des communes
+
+
+
   },
 
   created() {
     this.getData();
+    this.getCommunes();
   },
 };
 </script>

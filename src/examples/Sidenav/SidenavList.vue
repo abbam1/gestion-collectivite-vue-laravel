@@ -54,13 +54,13 @@
           </template>
         </sidenav-collapse>
       </li>
-      <!-- <li class="nav-item">
+      <li class="nav-item">
         <sidenav-collapse navText="Contribuables" :to="{ name: 'Contribuables' }">
           <template #icon>
             <office />
           </template>
         </sidenav-collapse>
-      </li> -->
+      </li> 
       <li class="nav-item">
         <sidenav-collapse navText="Comptes-Taxes" :to="{ name: 'ComptesTaxes' }">
           <template #icon>

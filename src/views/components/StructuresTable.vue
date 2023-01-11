@@ -48,7 +48,7 @@
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Chiffre d'affaire
+                      Chiffre d'affaire (CFA)
                     </th>
                     <!-- <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -248,7 +248,7 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Chiffre d'affaire:</label
+                >Chiffre d'affaire(CFA):</label
               >
               <input
                 type="text"
@@ -259,7 +259,7 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Géolocalisation:</label
+                >Localisation:</label
               >
               <input
                 type="text"
@@ -270,31 +270,38 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Taille:</label>
-              <input
-                v-model="formData.taille"
-                type="text"
-                class="form-control"
-                name="taille"
-                id="recipient-name"
-              />
+              <select class="form-control" name="taille" id="recipient-name">
+                <option value="grande surface">Grande surface</option>
+                <option Value="moyenne surface">Moyenne surface</option>
+                <option Value="magasin">Magasin</option>
+                <option Value="petit magasin">Petit magasin</option>
+                <option Value="sous auvent">Sous auvent</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Êtes-vous soumis à un impôt Synthétique?</label
               >
-
-              <select>
+              <select
+                class="form-control"
+                name="impot_synthetique"
+                id="recipient-name"
+              >
                 <option value="1">Oui</option>
-                <option Value="0">Non</option>
+                <option value="0">Non</option>
               </select>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Exercez-vous dans un centre commercial?</label
               >
-              <select>
+              <select
+                class="form-control"
+                name="centre_commercial"
+                id="recipient-name"
+              >
                 <option value="1">Oui</option>
-                <option Value="0">Non</option>
+                <option value="0">Non</option>
               </select>
             </div>
             <div class="form-group">
@@ -490,11 +497,11 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Chiffre d'affaire:</label
+                >Chiffre d'affaire (CFA):</label
               >
               <input
                 v-model="formData.chiffre_affaire"
-                type="text"
+                type="number"
                 class="form-control"
                 name="chiffre_affaire"
                 id="recipient-name"
@@ -502,7 +509,7 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Géolocalisation:</label
+                >Localisation:</label
               >
               <input
                 v-model="formData.geolocalisation"
@@ -514,13 +521,18 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Taille:</label>
-              <input
+              <select
                 v-model="formData.taille"
-                type="text"
                 class="form-control"
                 name="taille"
                 id="recipient-name"
-              />
+              >
+                <option value="grande surface">Grande surface</option>
+                <option Value="moyenne surface">Moyenne surface</option>
+                <option Value="magasin">Magasin</option>
+                <option Value="petit magasin">Petit magasin</option>
+                <option Value="sous auvent">Sous auvent</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
@@ -584,7 +596,7 @@
                 class="form-control"
                 v-model="formData.contribuable_id"
               >
-                <option value="">Choississez l'id</option>
+                <option value="" selected>Choississez l'id</option>
                 <option
                   v-for="item in listContribuables"
                   :key="'contribuable_' + item.id"
@@ -603,7 +615,7 @@
                 class="form-control"
                 v-model="formData.site_id"
               >
-                <option value="">Choississez l'id</option>
+                <option value="" selected>Choississez l'id</option>
                 <option
                   v-for="item in listSites"
                   :key="'site_' + item.id"
@@ -623,7 +635,7 @@
                 class="form-control"
                 v-model="formData.activite_id"
               >
-                <option value="">Choississez l'id</option>
+                <option value="" selected>Choississez l'id</option>
                 <option
                   v-for="item in listActivites"
                   :key="'activite_' + item.id"
@@ -744,7 +756,7 @@ export default {
       $("input[name=email]").val(item.email);
       $("input[name=chiffre_affaire]").val(item.chiffre_affaire);
       $("input[name=geolocalisation]").val(item.geolocalisation);
-      $("input[name=taille]").val(item.taille);
+      $("select[name=taille]").val(item.taille);
       $("input[name=impot_synthetique]").val(item.impot_synthetique);
       $("input[name=centre_commercial]").val(item.centre_commercial);
       $("input[name=adresse]").val(item.adresse);
@@ -758,7 +770,7 @@ export default {
       $("input[name=email]").val("");
       $("input[name=chiffre_affaire]").val("");
       $("input[name=geolocalisation]").val("");
-      $("input[name=taille]").val("");
+      $("select[name=taille]").val("");
       $("input[name=impot_synthetique]").val("");
       $("input[name=centre_commercial]").val("");
       $("input[name=adresse]").val("");
@@ -780,16 +792,14 @@ export default {
           this.$refs.closeUpdate.click();
           this.idToEdit = null;
           this.getData();
-          if (Swal.fire({
+
+          Swal.fire({
             icon: "success",
-            title: "Structures modifiée avec success",
+            title: "Structure modifiée avec success",
             showConfirmButton: false,
             timer: 2000,
-          })){
-            setTimeout(function () {
-              location.reload();
-            }, 2000);
-          }
+          });
+
           //Fermer le modal
           // alert("OKy")
           this.formData.nom = " ";

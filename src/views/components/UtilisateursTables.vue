@@ -61,7 +61,7 @@
                     >
                       Tel
                     </th>
-                    <th
+                    <!-- <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       Password
@@ -75,7 +75,7 @@
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       Poste
-                    </th>
+                    </th> -->
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
@@ -120,7 +120,7 @@
                         {{ item.contacts }}
                       </p>
                     </td>
-                    <td class="text-center">
+                    <!-- <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.password }}
                       </p>
@@ -134,7 +134,7 @@
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.post }}
                       </p>
-                    </td>
+                    </td> -->
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.commune_id }}
@@ -142,7 +142,7 @@
                     </td>
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.role }}
+                        {{ item.roles[0].fullname }}
                       </p>
                     </td>
                     <td class="text-center">
@@ -250,7 +250,9 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Tel:</label>
+              <label for="recipient-name" class="col-form-label"
+                >Contact:</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -260,25 +262,35 @@
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Password:</label
+                >Mot de passe:</label
               >
-              <input
-                type="text"
-                class="form-control"
-                name="password"
-                id="recipient-name"
-              />
+              <div class="mot-de-passe">
+                <input
+                  :type="showPwd ? 'text' : 'password'"
+                  class="form-control"
+                  name="password"
+                  id="password-field"
+                /><span
+                  class="fa fa-fw fa-eye field-icon toggle-password"
+                  @click="showPwd = !showPwd"
+                ></span>
+              </div>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >password_confirmation:</label
+                >Confirmer Mot de passe:</label
               >
-              <input
-                type="text"
-                class="form-control"
-                name="password_confirmation"
-                id="recipient-name"
-              />
+              <div class="mot-de-passe">
+                <input
+                  :type="showPwd ? 'text' : 'password'"
+                  class="form-control"
+                  name="password_confirmation"
+                  id="password-field"
+                /><span
+                  class="fa fa-fw fa-eye field-icon toggle-password"
+                  @click="showPwd = !showPwd"
+                ></span>
+              </div>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Poste:</label>
@@ -290,33 +302,34 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Poste:</label>
-              <input
-                type="text"
-                class="form-control"
-                name="poste"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >ID Commune:</label
               >
-              <input
-                type="text"
-                class="form-control"
-                name="commune_id"
-                id="recipient-name"
-              />
+              <select name="commune_id" class="form-control">
+                <option value="">
+                  Choississez l'ID<ion-icon name="caret-down"></ion-icon>
+                </option>
+                <option
+                  v-for="item in listCommunes"
+                  :key="'commune_' + item.id"
+                  :value="item.id"
+                >
+                  {{ item.nom }}
+                </option>
+              </select>
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Rôle:</label>
-              <input
-                type="text"
-                class="form-control"
-                name="role"
-                id="recipient-name"
-              />
+              <label for="recipient-name" class="col-form-label">Roles:</label>
+              <select name="role" class="form-control">
+                <option value="">Choississez le rôle ⇩</option>
+                <option
+                  v-for="item in listRoles"
+                  :key="'roles_' + item.id"
+                  :value="item.name"
+                >
+                  {{ item.fullname }}
+                </option>
+              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -442,12 +455,14 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Tel:</label>
+              <label for="recipient-name" class="col-form-label"
+                >Matricule:</label
+              >
               <input
-                v-model="formData.contacts"
+                v-model="formData.matricule"
                 type="text"
                 class="form-control"
-                name="contacts"
+                name="matricule"
                 id="recipient-name"
               />
             </div>
@@ -462,36 +477,92 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Poste:</label>
+              <label for="recipient-name" class="col-form-label"
+                >Contact:</label
+              >
               <input
-                v-model="formData.passsword"
+                v-model="formData.contacts"
                 type="text"
                 class="form-control"
-                name="poste"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Rôle:</label>
-              <input
-                v-model="formData.role"
-                type="text"
-                class="form-control"
-                name="role"
+                name="contacts"
                 id="recipient-name"
               />
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Matricule:</label
+                >Mot de passe:</label
               >
+              <div class="mot-de-passe">
+                <input
+                  v-model="formData.password"
+                  :type="showPwd ? 'text' : 'password'"
+                  class="form-control"
+                  name="password"
+                  id="password-field"
+                /><span
+                  class="fa fa-fw fa-eye field-icon toggle-password"
+                  @click="showPwd = !showPwd"
+                ></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >Confirmer Mot de passe:</label
+              >
+              <div class="mot-de-passe">
+                <input
+                  v-model="formData.password_confirmation"
+                  :type="showPwd ? 'text' : 'password'"
+                  class="form-control"
+                  name="password_confirmation"
+                  id="password-field"
+                /><span
+                  class="fa fa-fw fa-eye field-icon toggle-password"
+                  @click="showPwd = !showPwd"
+                ></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Poste:</label>
               <input
-                v-model="formData.commune_id"
+                v-model="formData.post"
                 type="text"
                 class="form-control"
-                name="matricule"
+                name="post"
                 id="recipient-name"
               />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >ID Commune:</label
+              >
+              <select
+                name="commune_id"
+                class="form-control"
+                v-model="formData.commune_id"
+              >
+                <option value="">Choississez l'ID ⇩</option>
+                <option
+                  v-for="item in listCommunes"
+                  :key="'commune_' + item.id"
+                  :value="item.id"
+                >
+                  {{ item.nom }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Role:</label>
+              <select name="role" class="form-control" v-model="formData.role">
+                <option value="">Choississez le rôle ⇩</option>
+                <option
+                  v-for="item in listRoles"
+                  :key="'roles_' + item.id"
+                  :value="item.name"
+                >
+                  {{ item.fullname }}
+                </option>
+              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -523,6 +594,22 @@
 .swal2-styled.swal2-confirm {
   background-color: #f6921d !important;
 }
+
+.mot-de-passe {
+  display: flex;
+}
+.fa,
+.fab,
+.fad,
+.fal,
+.far,
+.fas {
+  line-height: 2 !important;
+}
+
+.fa-fw {
+  width: 1.7em !important;
+}
 </style>
 
 <script>
@@ -543,7 +630,10 @@ export default {
       showAlertSuccess: false,
       idToEdit: null,
       items: [],
+      listCommunes: [],
+      listRoles: [],
       formData: {},
+      showPwd: false,
     };
   },
   methods: {
@@ -575,11 +665,13 @@ export default {
           }
           this.formData.nom = " ";
           this.formData.prenoms = " ";
-          this.formData.contacts = " ";
-          this.formData.email = " ";
-          this.formData.poste = " ";
-          this.formData.role = " ";
           this.formData.matricule = " ";
+          this.formData.email = " ";
+          this.formData.contacts = " ";
+          this.formData.password = " ";
+          this.formData.password_confirmation = " ";
+          this.formData.commune_id = " ";
+          this.formData.role = " ";
         })
         .catch((err) => {
           console.log(err);
@@ -594,20 +686,24 @@ export default {
       this.idToEdit = id;
       $("input[name=nom]").val(item.nom);
       $("input[name=prenoms]").val(item.prenoms);
-      $("input[name=contacts]").val(item.contacts);
-      $("input[name=email]").val(item.email);
-      $("input[name=poste]").val(item.poste);
-      $("input[name=role]").val(item.role);
       $("input[name=matricule]").val(item.matricule);
+      $("input[name=email]").val(item.email);
+      $("input[name=contacts]").val(item.contacts);
+      $("input[name=password]").val(item.password);
+      $("input[name=password_confirmation]").val(item.password_confirmation);
+      $("select[name=commune_id]").val(item.commune_id);
+      $("select[name=role]").val(item.roles[0].name);
     },
     clearInput() {
       $("input[name=nom]").val("");
       $("input[name=prenoms]").val("");
-      $("input[name=contacts]").val("");
-      $("input[name=email]").val("");
-      $("input[name=poste]").val("");
-      $("input[name=role]").val("");
       $("input[name=matricule]").val("");
+      $("input[name=email]").val("");
+      $("input[name=contacts]").val("");
+      $("input[name=password]").val("");
+      $("input[name=password_confirmation]").val("");
+      $("select[name=commune_id]").val("");
+      $("select[name=role]").val("");
     },
     editForm() {
       let formData = new FormData(this.$refs.editUsersForm);
@@ -632,11 +728,13 @@ export default {
           // alert("OKy")
           this.formData.nom = " ";
           this.formData.prenoms = " ";
-          this.formData.contacts = " ";
-          this.formData.email = " ";
-          this.formData.poste = " ";
-          this.formData.role = " ";
           this.formData.matricule = " ";
+          this.formData.email = " ";
+          this.formData.contacts = " ";
+          this.formData.password = " ";
+          this.formData.password_confirmation = " ";
+          this.formData.commune_id = " ";
+          this.formData.role = " ";
         })
         .catch((err) => {
           console.log(err);
@@ -691,10 +789,37 @@ export default {
           console.log(err);
         });
     },
+    // Recupération des communes
+    getCommunes() {
+      this.$axios
+        .get("/communes")
+        .then((res) => {
+          this.listCommunes = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // Recupération des communes
+
+    // Recupération des roles
+    getRoles() {
+      this.$axios
+        .get("/roles")
+        .then((res) => {
+          this.listRoles = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // Recupération des roles
   },
 
   created() {
     this.getData();
+    this.getCommunes();
+    this.getRoles();
   },
 };
 </script>

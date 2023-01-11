@@ -38,6 +38,11 @@
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
+                      ID
+                    </th>
+                    <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
                       Nom
                     </th>
                     <th
@@ -48,7 +53,7 @@
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Geolocalisation
+                      Localisation
                     </th>
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -59,6 +64,11 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in items" :key="'commune_' + item.id">
+                    <td class="ps-4">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.id }}
+                      </p>
+                    </td>
                     <td class="ps-4">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.nom }}
@@ -140,12 +150,25 @@
             <input type="hidden" name="_method" value="put" />
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
-              <input
-                type="text"
+              <select
                 class="form-control"
                 name="nom"
                 id="recipient-name"
-              />
+              >
+                <option value="Abobo">Abobo</option>
+                <option value="Adjame">Adjamé</option>
+                <option value="Anyama">Anyama</option>
+                <option value="Attecoube">Attécoubé</option>
+                <option value="Bingerville">Bingerville</option>
+                <option value="Cocody">Cocody</option>
+                <option value="Koumassi">Koumassi</option>
+                <option value="Marcory">Marcory</option>
+                <option value="Plateau">Plateau</option>
+                <option value="Port bouet">Port bouët</option>
+                <option value="Treichville">Treichville</option>
+                <option value="Songon">Songon</option>
+                <option value="Yopougon">Yopougon</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
@@ -160,7 +183,7 @@
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label"
-                >Geolocalisation:</label
+                >Localisation:</label
               >
               <textarea
                 class="form-control"
@@ -271,13 +294,27 @@
           <form ref="addCommuneForm" @submit.prevent="addForm">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
-              <input
-                type="text"
+              <select
                 v-model="formData.nom"
                 class="form-control"
                 name="nom"
                 id="recipient-name"
-              />
+              >
+              <option value="">Choississez votre commune ⇩</option>
+                <option value="Abobo">Abobo</option>
+                <option value="Adjame">Adjamé</option>
+                <option value="Anyama">Anyama</option>
+                <option value="Attecoube">Attécoubé</option>
+                <option value="Bingerville">Bingerville</option>
+                <option value="Cocody">Cocody</option>
+                <option value="Koumassi">Koumassi</option>
+                <option value="Marcory">Marcory</option>
+                <option value="Plateau">Plateau</option>
+                <option value="Port bouet">Port bouët</option>
+                <option value="Treichville">Treichville</option>
+                <option value="Songon">Songon</option>
+                <option value="Yopougon">Yopougon</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
@@ -293,7 +330,7 @@
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label"
-                >Geolocalisation:</label
+                >Localisation:</label
               >
               <textarea
                 class="form-control"
@@ -397,12 +434,12 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
-      $("input[name=nom]").val(item.nom);
+      $("select[name=nom]").val(item.nom);
       $("input[name=superficie]").val(item.superficie);
       $("textarea[name=geolocalisation]").val(item.geolocalisation);
     },
     clearInput() {
-      $("input[name=nom]").val("");
+      $("select[name=nom]").val("");
       $("input[name=superficie]").val("");
       $("textarea[name=geolocalisation]").val("");
     },
