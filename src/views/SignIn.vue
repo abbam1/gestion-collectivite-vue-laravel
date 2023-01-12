@@ -157,7 +157,7 @@ export default {
             Swal.fire({
               title: "Veuillez patientez!",
               timer: 3000,
-              timerProgressBar: true,
+              timerProgressBar: false,
               didOpen: () => {
                 Swal.showLoading();
                 const b = Swal.getHtmlContainer().querySelector("b");
@@ -171,7 +171,7 @@ export default {
             }).then((result) => {
               /* Read more about handling dismissals below */
               if (result.dismiss === Swal.DismissReason.timer) {
-                console.log("I was closed by the timer");
+                console.log("Chargement reussi");
               }
             })
           ) {

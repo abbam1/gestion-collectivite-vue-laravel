@@ -161,9 +161,15 @@ export default {
       console.log(res) 
       if(res.status==200){ 
       let data = res.data;
-      this.$store.state.user.data = data.data.user;
-      this.$store.state.user.token = data.data.token;
-      localStorage.setItem("collectivite_user", JSON.stringify(data.data.user))
+      // this.$store.state.user.data = data.data.user;
+      // this.$store.state.user.token = data.data.token;
+      // localStorage.setItem("collectivite_user", JSON.stringify(data.data.user))
+      this.$store.commit("SET_USER", data.data);
+      // this.$store.state.user.token = data.data.token;
+      // console.log(this.store.state.status);
+      localStorage.setItem("collectivite_user", JSON.stringify(data.data));
+      // localStorage.setItem("collectivite_token", data.data.token);
+
       this.$router.push({ path: "/sign-in" })
       alert(" L'utilisateur a été créé avec succès")
       }

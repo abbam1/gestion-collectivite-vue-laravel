@@ -9,6 +9,7 @@ import Taxes from "@/views/Taxes.vue";
 import CartesMag from "@/views/CartesMag.vue";
 import Structures from "@/views/Structures.vue";
 import Activites from "@/views/Activites.vue";
+import PlusInfosContribuable from "@/views/PlusInfosContribuable.vue";
 import Contribuables from "@/views/Contribuables.vue";
 import Utilisateurs from "@/views/Utilisateurs.vue";
 import ComptesTaxes from "@/views/ComptesTaxes.vue";
@@ -82,6 +83,11 @@ const routes = [
     path: "/cartesmag",
     name: "CartesMag",
     component: CartesMag,
+  },
+  {
+    path: "/infoscontribuable",
+    name: "Les Informations du Contribuable",
+    component: PlusInfosContribuable,
   },
   {
     path: "/activites",

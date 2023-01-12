@@ -31,7 +31,7 @@ let store = createStore({
   mutations: {
 
     SET_USER(state, data) {
-      state.user.data = data.user
+      state.user.data = data.data
       state.user.token = data.token
     },
     navbarMinimize(state) {

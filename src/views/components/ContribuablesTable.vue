@@ -246,6 +246,17 @@
                       </span>
                     </td> -->
                     <td class="text-center">
+                      <!-- Button Plus d'information -->
+                      <!-- <a
+                        type="button"
+                        class="mx-3 buttonSites"
+                        href='/infoscontribuable'>
+
+                      
+                      <i class="fas fa-circle-info text-secondary"></i>
+                    </a> -->
+                      <!-- Button Plus d'information -->
+
                       <!-- Button trigger modal -->
                       <button
                         type="button"
