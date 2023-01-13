@@ -157,7 +157,7 @@ export default {
             Swal.fire({
               title: "Veuillez patientez!",
               timer: 3000,
-              timerProgressBar: false,
+              timerProgressBar: true,
               didOpen: () => {
                 Swal.showLoading();
                 const b = Swal.getHtmlContainer().querySelector("b");

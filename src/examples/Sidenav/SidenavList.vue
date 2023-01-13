@@ -176,7 +176,7 @@ export default {
     listMenuPerso(){
       let lt = [];
       lt = this.listMenu.filter((val) => {
-        return val.abilities.includes(this.$store.state.user.data.roles[0].name);
+        return val.abilities.includes(this.$store.state.user.data?.roles[0]?.name);
       })
       return lt;
     }

@@ -15,6 +15,8 @@ import Utilisateurs from "@/views/Utilisateurs.vue";
 import ComptesTaxes from "@/views/ComptesTaxes.vue";
 import Communes from "@/views/Communes.vue";
 
+import store from "../store";
+
 const routes = [
   {
     path: "/",
@@ -25,12 +27,16 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+    meta: {requireAuth : true}
+
   },
   
   {
     path: "/profile",
     name: "Profile",
     component: Profile,
+    meta: {requireAuth : true}
+
   },
   
   {
@@ -47,57 +53,69 @@ const routes = [
     path: "/sites",
     name: "Sites",
     component: Sites,
+    meta: {requireAuth : true}
+
   },
   {
     path: "/taxes",
     name: "Taxes",
     component: Taxes,
+    meta: {requireAuth : true}
   },
   {
     path: "/contribuables",
     name: "Contribuables",
     component: Contribuables,
+    meta: {requireAuth : true}
   },
   {
     path: "/comptesTaxes",
     name: "ComptesTaxes",
     component: ComptesTaxes,
+    meta: {requireAuth : true}
   },
   {
     path: "/utilisateurs",
     name: "Utilisateurs",
     component: Utilisateurs,
+    meta: {requireAuth : true}
   },
   
   {
     path: "/communes",
     name: "Communes",
     component: Communes,
+    meta: {requireAuth : true}
   },
   {
     path: "/structures",
     name: "Structures",
     component: Structures,
+    meta: {requireAuth : true}
   },
   {
     path: "/cartesmag",
     name: "CartesMag",
     component: CartesMag,
+    meta: {requireAuth : true}
   },
   {
     path: "/infoscontribuable",
     name: "Les Informations du Contribuable",
     component: PlusInfosContribuable,
+    meta: {requireAuth : true}
   },
   {
     path: "/activites",
     name: "Activites",
     component: Activites,
+    meta: {requireAuth : true}
   },
   {
     path: "/biens",
     name: "Biens",
     component: Biens,
+    meta: {requireAuth : true}
   },
 ];
 
@@ -106,5 +124,13 @@ const router = createRouter({
   routes,
   linkActiveClass: "active",
 });
+
+router.beforeEach((to)=>{
+  if ( to.meta.requireAuth && !store.state.user.data && to.name !== 'Sign In'
+) {
+  // redirect the user to the login page
+  return { name: 'Sign In' }
+}
+})
 
 export default router;
