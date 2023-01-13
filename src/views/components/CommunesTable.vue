@@ -368,10 +368,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import Swal from "sweetalert2";
+import HandleError from "@/mixins/HandleError"
 
 export default {
   name: "communesTable",
-
+  mixins:[HandleError],
   components: {},
   data() {
     return {
@@ -415,9 +416,11 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          let message = this.getErrorMessage(err.response.data)
+          
           Swal.fire({
             icon: "warning",
-            title: "Commune déjà existante",
+            title: message,
             showConfirmButton: true,
           });
         });
@@ -460,6 +463,11 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "warning",
+            title: `${err.response.data.message}`,
+            showConfirmButton: true,
+          });
         });
     },
     deleteItem() {

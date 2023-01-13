@@ -3,9 +3,9 @@
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
         ><strong
-          >Bienvenue sur l'espace de gestion des Structures, vous pouvez</strong
+          >Liste des structures rattachés aux  <strong>contribuables</strong></strong
         >
-        <strong> Ajouter, modifier ou Supprimer une structure</strong>
+       
       </span>
     </div>
 

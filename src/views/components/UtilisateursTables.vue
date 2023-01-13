@@ -738,6 +738,11 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "warning",
+            title: `${err.response.data.message}`,
+            showConfirmButton: true,
+          });
         });
     },
     deleteItem() {
@@ -767,6 +772,11 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "warning",
+            title: `${err.response.data.message}`,
+            showConfirmButton: true,
+          });
         });
     },
 

@@ -389,10 +389,9 @@
                
               >
                 <option value="" selected>Choississez votre statut</option>
-                <option value="celibataire">Célibataire</option>
-                <option value="marié(e)">Marié(e)</option>
-                <option value="veuve_veuf">Veuve/veuf</option>
-                <option value="divorcé(e)">Divorcé(e)</option>
+                <option value="Célibataire">Célibataire</option>
+                <option value="Marié">Marié</option>
+                <option value="divorce">divorce</option>
               </select>
             </div>
             <div class="form-group">
@@ -2028,7 +2027,7 @@ export default {
           console.log(err);
           Swal.fire({
             icon: "warning",
-            title: "Taxe déjà existante",
+            title: `${err.response.data.message}`,
             showConfirmButton: true,
           });
         });
@@ -2122,6 +2121,11 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "warning",
+            title: `${err.response.data.message}`,
+            showConfirmButton: true,
+          });
         });
     },
     deleteItem() {

@@ -15,7 +15,7 @@ import ContribuablesTable from "./components/ContribuablesTable";
 export default {
   name: "contribuablesTable",
   components: {
-    ContribuablesTable
+    ContribuablesTable,
 }
 };
 </script>

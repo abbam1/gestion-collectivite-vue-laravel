@@ -60,7 +60,7 @@
                 </div>
                 <div class="px-1 pt-0 text-center card-footer px-lg-2">
                   <p class="mx-auto mb-4 text-sm">
-                    Prêt à administrer cette application? Cliquez
+                    Pas encore enregistré ? Cliquez
                     <router-link
                       :to="{ name: 'Sign Up' }"
                       class="text-success text-gradient font-weight-bold"
@@ -156,7 +156,7 @@ export default {
           if (
             Swal.fire({
               title: "Veuillez patientez!",
-              timer: 3000,
+              timer: 2000,
               timerProgressBar: true,
               didOpen: () => {
                 Swal.showLoading();
@@ -179,8 +179,13 @@ export default {
           }
         })
         .catch((err) => {
-          alert("Utilisateur inconnu");
           console.log(err);
+          Swal.fire({
+            icon: "warning",
+            title: `${err.response.data.message}`,
+            showConfirmButton: true,
+          });
+
         });
     },
   },
