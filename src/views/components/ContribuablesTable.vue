@@ -261,6 +261,16 @@
                       <button
                         type="button"
                         class="mx-3 buttonSites"
+                        @click="$router.push('/contribuables/'+ item.id)"
+                      >
+                      <i class="fas fa-circle-info text-secondary"></i>
+                      </button>
+                      <!-- Button trigger modal -->
+
+                      <!-- Button trigger modal -->
+                      <button
+                        type="button"
+                        class="mx-3 buttonSites"
                         @click="setEdit(item.id, item)"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
@@ -1007,7 +1017,6 @@
                 type="text"
                 name="tel_fix"
                 class="form-control"
-               
                 id="recipient-name"
               />
             </div>

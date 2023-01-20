@@ -3,7 +3,7 @@
     class="w-auto h-auto collapse navbar-collapse max-height-vh-100 h-100"
     id="sidenav-collapse-main"
   >
-    <ul class="navbar-nav">
+    <ul class="navbar-nav" >
       <li class="nav-item">
         <sidenav-collapse navText="Vue d'ensemble " :to="{ name: 'Dashboard' }">
           <template #icon>
@@ -131,11 +131,6 @@ export default {
           titre: "Activités",
           route: { name: "Activites" },
           abilities: ["admin", "manager"],
-        },
-        {
-          titre: "Structures",
-          route: { name: "Structures" },
-          abilities: ["manager"],
         },
         {
           titre: "Taxes",

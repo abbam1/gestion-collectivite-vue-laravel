@@ -17,7 +17,7 @@
           :class="this.$store.state.isRTL ? 'me-md-auto' : 'ms-md-auto'"
         >
         <div class="ms-md-3 pe-md-11 d-flex align-items-center">
-                <h5 class="font-weight-bolder">Interface de gestion des collectivités</h5>
+                <h5 class="font-weight-bolder">Interface de gestion des collectivités  <strong class="text-uppercase">{{ $store.state.user && $store.state.user.data?.commune ? ' | ' + $store.state.user.data?.commune?.nom : '' }}</strong></h5>
 
                 </div>
         </div>

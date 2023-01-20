@@ -3,7 +3,7 @@
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
         ><strong
-          >Liste des structures rattachés aux  <strong>contribuables</strong></strong
+          >Liste des structures rattachés </strong
         >
        
       </span>
@@ -586,7 +586,7 @@
                 id="recipient-name"
               />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >ID Contribuable:</label
               >
@@ -605,7 +605,8 @@
                   {{ item.nom }}
                 </option>
               </select>
-            </div>
+            </div> -->
+            <input type="hidden" :value="id_contribuable" name="contribuable_id"/>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >ID Site:</label
@@ -689,6 +690,12 @@ export default {
   name: "structuresTable",
 
   components: {},
+  props:{
+    id_contribuable:{
+      type:Number,
+      required:true
+    }
+  },
   data() {
     return {
       url: "/structures",
@@ -861,7 +868,7 @@ export default {
 
     async getData() {
       this.$axios
-        .get("/structures")
+        .get("/contribuables/"+this.id_contribuable+"/structures")
         .then((res) => {
           this.items = res.data.data;
           $(document).ready(function () {

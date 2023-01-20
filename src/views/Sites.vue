@@ -31,9 +31,19 @@ export default {
     background-image: linear-gradient(310deg, #17ad37 0%, #fa963a 100%)!important;
 }
 
+.fa-trash:before {
+    content: "\f1f8";
+    color: red;
+}
 .sidenav{
 z-index: 0!important; 
 
+}
+
+
+.fa-user-edit:before {
+    content: "\f4ff";
+    color: #49a838;
 }
 
 </style>

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "@/views/Dashboard.vue";
-import Profile from "@/views/Profile.vue";
+import Contribuable from "@/views/Contribuable.vue";
 import SignIn from "@/views/SignIn.vue";
 import SignUp from "@/views/SignUp.vue";
 import Sites from "@/views/Sites.vue";
@@ -32,10 +32,11 @@ const routes = [
   },
   
   {
-    path: "/profile",
-    name: "Profile",
-    component: Profile,
-    meta: {requireAuth : true}
+    path: "/contribuables/:id",
+    name: "Contribuable",
+    component: Contribuable,
+    meta: {requireAuth : true},
+    props: route =>({id:route.params.id})
 
   },
   

@@ -37,6 +37,10 @@
           <strong class="text-dark">Location:</strong> &nbsp;
           {{ info.location }}
         </li>
+        <li class="text-sm border-0 list-group-item ps-0">
+          <strong class="text-dark">Mère:</strong> &nbsp;
+          {{ info.mere }}
+        </li>
         <li class="pb-0 border-0 list-group-item ps-0">
           <strong class="text-sm text-dark">Social:</strong> &nbsp;
           <a
@@ -76,6 +80,7 @@ export default {
       mobile: String,
       email: String,
       location: String,
+      mere: String,
       default: () => {},
     },
     social: {
