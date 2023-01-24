@@ -302,21 +302,12 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Commune:</label
-              >
-              <select name="commune_id" class="form-control">
-                <option value="">
-                  Choississez l'ID<ion-icon name="caret-down"></ion-icon>
-                </option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+              <input
+                type="hidden"
+                name="commune_id"
+                class="form-control"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Roles:</label>
@@ -533,23 +524,12 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Commune:</label
-              >
-              <select
+              <input
+                type="hidden"
                 name="commune_id"
                 class="form-control"
-                v-model="formData.commune_id"
-              >
-                <option value="">Choississez l'ID ⇩</option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Role:</label>
@@ -702,7 +682,6 @@ export default {
       $("input[name=contacts]").val("");
       $("input[name=password]").val("");
       $("input[name=password_confirmation]").val("");
-      $("select[name=commune_id]").val("");
       $("select[name=role]").val("");
     },
     editForm() {

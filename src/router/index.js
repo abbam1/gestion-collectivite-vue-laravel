@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "@/views/Dashboard.vue";
-import Contribuable from "@/views/Contribuable.vue";
+import ContribuablePlus from "@/views/ContribuablePlus.vue";
+import ComptesTaxesPlus from "@/views/ComptesTaxesPlus.vue";
+import StructurePlus from "@/views/StructurePlus.vue";
 import SignIn from "@/views/SignIn.vue";
 import SignUp from "@/views/SignUp.vue";
 import Sites from "@/views/Sites.vue";
@@ -9,7 +11,6 @@ import Taxes from "@/views/Taxes.vue";
 import CartesMag from "@/views/CartesMag.vue";
 import Structures from "@/views/Structures.vue";
 import Activites from "@/views/Activites.vue";
-import PlusInfosContribuable from "@/views/PlusInfosContribuable.vue";
 import Contribuables from "@/views/Contribuables.vue";
 import Utilisateurs from "@/views/Utilisateurs.vue";
 import ComptesTaxes from "@/views/ComptesTaxes.vue";
@@ -34,7 +35,24 @@ const routes = [
   {
     path: "/contribuables/:id",
     name: "Contribuable",
-    component: Contribuable,
+    component: ContribuablePlus,
+    meta: {requireAuth : true},
+    props: route =>({id:route.params.id})
+
+  },
+  {
+    path: "/structures/:id",
+    name: "structure",
+    component: StructurePlus,
+    meta: {requireAuth : true},
+    props: route =>({id:route.params.id})
+
+  },
+  
+  {
+    path: "/comptetaxe/:id",
+    name: "ComptesTaxesPlus",
+    component: ComptesTaxesPlus,
     meta: {requireAuth : true},
     props: route =>({id:route.params.id})
 
@@ -100,12 +118,7 @@ const routes = [
     component: CartesMag,
     meta: {requireAuth : true}
   },
-  {
-    path: "/infoscontribuable",
-    name: "Les Informations du Contribuable",
-    component: PlusInfosContribuable,
-    meta: {requireAuth : true}
-  },
+  
   {
     path: "/activites",
     name: "Activites",

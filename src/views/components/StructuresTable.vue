@@ -3,7 +3,7 @@
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
         ><strong
-          >Liste des structures rattachés </strong
+          >Liste des structures rattachés à ce contribuable </strong
         >
        
       </span>
@@ -165,6 +165,17 @@
                       </p>
                     </td> -->
                     <td class="text-center">
+
+                      <!-- Button trigger modal -->
+                      <button
+                        type="button"
+                        class="mx-3 buttonSites"
+                        @click="$router.push('/structures/'+ item.id)"
+                      >
+                      <i class="fas fa-circle-info text-secondary"></i>
+                      </button>
+                      <!-- Button trigger modal -->
+
                       <!-- Button trigger modal -->
                       <button
                         type="button"

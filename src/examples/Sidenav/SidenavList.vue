@@ -132,11 +132,7 @@ export default {
           route: { name: "Activites" },
           abilities: ["admin", "manager"],
         },
-        {
-          titre: "Taxes",
-          route: { name: "Taxes" },
-          abilities: ["manager"],
-        },
+
         {
           titre: "Contribuables",
           route: { name: "Contribuables" },

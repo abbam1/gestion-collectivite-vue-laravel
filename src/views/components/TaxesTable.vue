@@ -3,9 +3,8 @@
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
         ><strong
-          >Bienvenue sur l'espace de gestion des Taxes, vous pouvez</strong
+          >Liste des taxes rattachés</strong
         >
-        <strong> Ajouter, modifier ou Supprimer une taxe</strong>
       </span>
     </div>
 

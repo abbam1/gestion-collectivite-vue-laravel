@@ -180,22 +180,12 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Commune:</label
-              >
-              <select
+              <input
+                type="hidden"
                 name="commune_id"
                 class="form-control"
-              >
-                <option value="" selected>Choississez l'id</option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -333,23 +323,12 @@
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Commune:</label
-              >
-              <select
+              <input
+                type="hidden"
                 name="commune_id"
                 class="form-control"
-                v-model="formData.commune_id"
-              >
-                <option value="" selected>Choississez l'id</option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
             </div>
             <div class="modal-footer">
               <button

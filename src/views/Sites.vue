@@ -11,7 +11,6 @@
 <script>
 
 import SitesTable from "./components/SitesTable";
-
 export default {
   name: "sites",
   components: {

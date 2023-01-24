@@ -183,20 +183,12 @@
               </select>
               </div>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">ID Commune:</label>
-                <select
+                <input
+                type="hidden"
                 name="commune_id"
                 class="form-control"
-              >
-                <option value="">Choississez l'ID ⇩</option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
               </div>
               <div class="modal-footer">
                 <button
@@ -335,21 +327,12 @@
               </select>
               </div>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">ID Commune:</label>
-                <select
+                <input
+                type="hidden"
                 name="commune_id"
                 class="form-control"
-                v-model="formData.commune_id"
-              >
-                <option value="">Choississez l'ID ⇩</option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
               </div>
               <div class="modal-footer">
                 <button
@@ -458,7 +441,6 @@
         $("input[name=numero]").val("");
         $("input[name=num_tremo]").val("");
         $("select[name=contribuable_id]").val("");
-        $("select[name=commune_id]").val("");
       },
       editForm() {
       let formData = new FormData(this.$refs.editCartesForm);

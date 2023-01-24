@@ -35,7 +35,7 @@
                         class="btn bg-gradient-primary btn-sm mb-0 buttonSites"
                         @click="setEdit(item.id, item)"
                         data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
+                        data-bs-target="#exampleModal5"
                         data-bs-original-title="Edit user"
                       >
                   +&nbsp; Modifier les Informtions
@@ -163,7 +163,7 @@
     <!-- Modal pour modifier -->
     <div
     class="modal fade"
-    id="exampleModal"
+    id="exampleModal5"
     tabindex="-1"
     role="dialog"
     aria-labelledby="exampleModalLabel"
@@ -983,7 +983,7 @@ import setTooltip from "@/assets/js/tooltip.js";
 import StructuresTable from "@/views/components/StructuresTable"
 
 export default {
-  name: "ProfileOverview",
+  name: "ContribuablePlus",
   components: {StructuresTable},
   props: {
     id: {

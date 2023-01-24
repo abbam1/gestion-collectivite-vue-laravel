@@ -3,9 +3,8 @@
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
         ><strong
-          >Bienvenue sur l'espace de gestion des Sites, vous pouvez</strong
+          >Liste des taxes rattachés à cette structure</strong
         >
-        <strong> Ajouter, modifier ou Supprimer un sites</strong>
       </span>
     </div>
 
@@ -15,7 +14,7 @@
           <div class="card-header pb-0">
             <div class="d-flex flex-row justify-content-between">
               <div>
-                <h5 class="mb-0">Tout les Sites</h5>
+                <h5 class="mb-0">Toutes les Taxes rattachées</h5>
               </div>
               <!-- Button trigger modal -->
               <button
@@ -25,7 +24,7 @@
                 data-bs-target="#exampleModalMessage"
                 @click="clearInput()"
               >
-                +&nbsp; Ajouter un Site
+                +&nbsp; rattacher une Taxe
               </button>
               <!-- Button trigger modal -->
             </div>
@@ -38,23 +37,18 @@
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Nom
+                      Taxe
                     </th>
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Description
+                      Période
                     </th>
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Geolocalisation
+                      montant
                     </th>
-                    <!-- <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      ID Commune
-                    </th> -->
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
@@ -63,7 +57,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in items" :key="'site_' + item.id">
+                  <tr v-for="item in items" :key="'taxe_' + item.id">
                     <td class="ps-4">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.nom }}
@@ -71,19 +65,15 @@
                     </td>
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.description }}
+                        {{ item.debut_payement }}
                       </p>
                     </td>
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.geolocalisation }}
+                        {{ item.pivot.montant }}
                       </p>
                     </td>
-                    <!-- <td class="text-center">
-                      <span class="text-xs font-weight-bold mb-0">{{
-                        item.commune_id
-                      }}</span>
-                    </td> -->
+                    
                     <td class="text-center">
                       <!-- Button trigger modal -->
                       <button
@@ -133,7 +123,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modifier un Site</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Modifier une taxe rattachée</h5>
           <button
             type="button"
             class="btn-close text-dark"
@@ -144,47 +134,50 @@
           </button>
         </div>
         <div class="modal-body">
-          <form ref="editSitesForm" @submit.prevent="editForm">
+          <form ref="editTaxesForm" @submit.prevent="editForm">
             <input type="hidden" name="_method" value="put" />
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nom:</label>
-              <input
-                type="text"
-                class="form-control"
-                name="nom"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Description:</label
+                >Taxe:</label
               >
-              <input
-                type="text"
+              <select
+                name="taxe_id"
                 class="form-control"
-                name="description"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Geolocalisation:</label
               >
-              <input
-                type="text"
-                class="form-control"
-                name="geolocalisation"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-                <input
-                type="hidden"
-                name="commune_id"
-                class="form-control"
-                :value="items.id"
+                <option value="" selected>Choississez la taxe</option>
+                <option
+                  v-for="item in listTaxes"
+                  :key="'taxe_' + item.id"
+                  :value="item.id"
                 >
+                  {{ item.nom }}
+                </option>
+              </select>
             </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >Début du payement:</label
+              >
+              <input
+                placeholder="Ex:1-10"
+                type="date"
+                class="form-control"
+                name="debut_payement"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >Montant de la taxe:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="montant"
+                id="recipient-name"
+              />
+            </div>
+            
             <div class="modal-footer">
               <button
                 type="button"
@@ -221,7 +214,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Supprimer un site</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Supprimer une taxe</h5>
           <button
             type="button"
             class="btn-close text-dark"
@@ -233,7 +226,7 @@
         </div>
         <div class="modal-body">
           <h5 class="modal-title" id="exampleModalLabel">
-            Êtes-vous sûr de vouloir supprimer ce site?
+            Êtes-vous sûr de vouloir supprimer cette taxe?
           </h5>
           <div class="modal-footer">
             <button
@@ -258,7 +251,7 @@
   </div>
   <!--Modal pour Supprimer-->
 
-  <!--Modal pour ajouter-->
+  <!--Modal pour rattacher une taxe à une structure-->
   <div
     class="modal fade"
     id="exampleModalMessage"
@@ -270,7 +263,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ajouter un Site</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Rattacher une Taxe à cette structure</h5>
           <button
             type="button"
             class="btn-close text-dark"
@@ -281,49 +274,52 @@
           </button>
         </div>
         <div class="modal-body">
-          <form ref="addSitesForm" @submit.prevent="addForm">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nom:</label>
-              <input
-                type="text"
-                value="formData.nom"
-                class="form-control"
-                name="nom"
-                id="recipient-name"
-              />
-            </div>
+          <form ref="addTaxesForm" @submit.prevent="addForm">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
-                >Description:</label
+                >Taxe:</label
               >
-              <input
-                type="text"
-                v-model="formData.description"
+              <select
+                name="taxe_id"
                 class="form-control"
-                name="description"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Geolocalisation:</label
+                v-model="formData.taxe_id"
               >
-              <input
-                type="text"
-                v-model="formData.geolocalisation"
-                class="form-control"
-                name="geolocalisation"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-                <input
-                type="hidden"
-                name="commune_id"
-                class="form-control"
-                :value="this.$store.state.user.data.commune_id"
+                <option value="" selected>Choississez la taxe</option>
+                <option
+                  v-for="item in listTaxes"
+                  :key="'taxe_' + item.id"
+                  :value="item.id"
                 >
+                  {{ item.nom }}
+                </option>
+              </select>
             </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >Début du payement:</label
+              >
+              <input
+                placeholder="Ex:1-10"
+                type="date"
+                v-model="formData.debut_payement"
+                class="form-control"
+                name="debut_payement"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >Montant de la taxe:</label
+              >
+              <input
+                type="text"
+                v-model="formData.montant"
+                class="form-control"
+                name="montant"
+                id="recipient-name"
+              />
+            </div>
+            
             <div class="modal-footer">
               <button
                 type="button"
@@ -365,25 +361,33 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import Swal from "sweetalert2";
 
 export default {
-  name: "SitesTable",
+  name: "TaxesTableDesSTR",
 
   components: {},
+  props:{
+    id_structure:{
+      type:Number,
+      required:true
+    }
+  },
   data() {
     return {
-      url: "/sites",
+      url: "/taxes",
       showAlertSuccess: false,
       idToEdit: null,
+      listeComptesTaxes: [],
       listCommunes: [],
+      listTaxes: [],
       items: [],
       formData: {},
     };
   },
   methods: {
     addForm() {
-      let formData = new FormData(this.$refs.addSitesForm);
+      let formData = new FormData(this.$refs.addTaxesForm);
 
       this.$axios
-        .post("/sites", formData)
+        .post("/structures/" + this.id_structure + "/attach/" + this.formData.taxe_id, formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -396,7 +400,7 @@ export default {
           if (
             Swal.fire({
               icon: "success",
-              title: "Site enregistré avec success",
+              title: "Taxe rattachée avec succcès",
               showConfirmButton: false,
               timer: 2000,
             })
@@ -405,10 +409,7 @@ export default {
               location.reload();
             }, 2000);
           }
-          this.formData.nom = " ";
-          this.formData.description = " ";
-          this.formData.geolocalisation = " ";
-          this.formData.commune_id = " ";
+          this.formData.taxe_id ={};
         })
         .catch((err) => {
           console.log(err);
@@ -421,22 +422,20 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
-      $("input[name=nom]").val(item.nom);
-      $("input[name=description]").val(item.description);
-      $("input[name=geolocalisation]").val(item.geolocalisation);
-      $("input[name=commune_id]").val(item.commune_id);
+      $("select[name=taxe_id]").val(item.nom);
+      $("input[name=debut_payement]").val(item.debut_payement);
+      $("input[name=montant]").val(item.pivot.montant);
     },
     clearInput() {
-      $("input[name=nom]").val("");
-      $("input[name=description]").val("");
-      $("input[name=geolocalisation]").val("");
-      console.log(this.$store.state.user.data.commune_id)
-    },
+      $("select[name=taxe_id]").val("");
+      $("input[name=debut_payement]").val("");
+      $("input[name=montant]").val("");   
+     },
     editForm() {
-      let formData = new FormData(this.$refs.editSitesForm);
+      let formData = new FormData(this.$refs.editTaxesForm);
 
       this.$axios
-        .post("/sites/" + this.idToEdit, formData)
+        .post("/structures/" + this.id_structure + "/attach/" + this.formData.taxe_id, formData + this.idToEdit, formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -447,16 +446,15 @@ export default {
           this.getData();
           Swal.fire({
             icon: "success",
-            title: "Site modifié avec success",
+            title: "Rattachement modifié avec success",
             showConfirmButton: false,
             timer: 2000,
           });
           //Fermer le modal
           // alert("OKy")
-          this.formData.nom = " ";
-          this.formData.description = " ";
-          this.formData.geolocalisation = " ";
-          this.formData.commune_id = " ";
+          this.formData.taxe_id = " ";
+          this.formData.debut_payement = " ";
+          this.formData.pivot.montant = " ";
         })
         .catch((err) => {
           console.log(err);
@@ -471,7 +469,7 @@ export default {
       // let formData = new FormData(this.$refs.editCommuneForm);
 
       this.$axios
-        .delete("/sites/" + this.idToEdit)
+        .delete("/taxes/" + this.idToEdit)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -482,7 +480,7 @@ export default {
           if (
             Swal.fire({
               icon: "success",
-              title: "Site supprimé avec success",
+              title: "Taxe supprimée avec success",
               showConfirmButton: false,
               timer: 2000,
             })
@@ -505,7 +503,7 @@ export default {
 
     async getData() {
       this.$axios
-        .get("/sites")
+        .get("/structures/"+this.id_structure+"/taxes")
         .then((res) => {
           this.items = res.data.data;
           $(document).ready(function () {
@@ -516,17 +514,28 @@ export default {
                   "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json",
               },
             });
-
           });
-          
         })
         .catch((err) => {
           console.log(err);
         });
     },
 
-     // Recupération des communes
-     getCommunes() {
+    // Recupération des comptes taxes
+    getCompteTaxe() {
+      this.$axios
+        .get("/comptetaxes")
+        .then((res) => {
+          this.listeComptesTaxes = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // Recupération des comptes taxes
+
+    // Recupération des communes
+    getCommunes() {
       this.$axios
         .get("/communes")
         .then((res) => {
@@ -538,12 +547,25 @@ export default {
     },
     // Recupération des communes
 
-
+    // Recupération des taxes global
+    getTaxes() {
+      this.$axios
+        .get("/taxes")
+        .then((res) => {
+          this.listTaxes = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // Recupération des taxes global
   },
 
   created() {
     this.getData();
+    this.getCompteTaxe();
     this.getCommunes();
+    this.getTaxes();
   },
 };
 </script>

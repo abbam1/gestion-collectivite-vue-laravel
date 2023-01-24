@@ -75,6 +75,16 @@
                       }}</span>
                     </td> -->
                     <td class="text-center">
+                       <!-- Button trigger modal -->
+                       <button
+                        type="button"
+                        class="mx-3 buttonSites"
+                        @click="$router.push('/comptetaxe/'+ item.id)"
+                      >
+                      <i class="fas fa-circle-info text-secondary"></i>
+                      </button>
+                      <!-- Button trigger modal -->
+
                       <!-- Button trigger modal -->
                       <button
                         type="button"
@@ -159,23 +169,12 @@
               />
             </div>
             <div class="form-group">
-              <label for="message-text" class="col-form-label"
-                >ID commune:</label
-              >
-              <select
+              <input
+               type="hidden"
                 name="commune_id"
                 class="form-control"
-                
-              >
-                <option value="" selected>Choississez l'id</option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -301,23 +300,12 @@
               />
             </div>
             <div class="form-group">
-              <label for="message-text" class="col-form-label"
-                >ID commune:</label
-              >
-              <select
+              <input
+                type="hidden"
                 name="commune_id"
                 class="form-control"
-                v-model="formData.commune_id"
-              >
-                <option value="" selected>Choississez l'id</option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
             </div>
             <div class="modal-footer">
               <button
@@ -417,12 +405,11 @@ export default {
       this.idToEdit = id;
       $("input[name=nom]").val(item.nom);
       $("input[name=code]").val(item.code);
-      $("select[name=commune_id]").val(item.commune_id);
+      $("input[name=commune_id]").val(item.commune_id);
     },
     clearInput() {
       $("input[name=nom]").val("");
       $("input[name=code]").val("");
-      $("select[name=commune_id]").val("");
     },
     editForm() {
       let formData = new FormData(this.$refs.editCompteTaxesForm);
