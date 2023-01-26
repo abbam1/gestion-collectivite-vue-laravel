@@ -38,6 +38,7 @@
     "sweetalert2": "^11.6.16",
     "vue": "3.2.0",
     "vue-flatpickr-component": "9.0.5",
+    "vue-resource": "^1.5.3",
     "vue-router": "^4.0.0-0",
     "vue-simple-alert": "^1.1.1",
     "vue-tailwind": "^2.5.1",

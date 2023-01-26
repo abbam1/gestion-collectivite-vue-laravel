@@ -95,7 +95,7 @@
                     </td>
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.montant_defaut }}
+                        {{ formatage(item.montant_defaut) }}
                       </p>
                     </td>
                     <!-- <td class="text-center">
@@ -698,6 +698,16 @@ export default {
         });
     },
     // Recupération des communes
+    
+//formatage en XOF    
+    formatage (currency) {
+    const formatter = new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'XOF',
+    });
+    return formatter.format(currency)
+   }
+//formatage en XOF
   },
 
   created() {

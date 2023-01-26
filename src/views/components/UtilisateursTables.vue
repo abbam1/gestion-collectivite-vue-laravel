@@ -76,11 +76,11 @@
                     >
                       Poste
                     </th> -->
-                    <th
+                    <!-- <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       ID Commune
-                    </th>
+                    </th> -->
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
@@ -135,11 +135,11 @@
                         {{ item.post }}
                       </p>
                     </td> -->
-                    <td class="text-center">
+                    <!-- <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.commune_id }}
                       </p>
-                    </td>
+                    </td> -->
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
                         {{ item.roles[0].fullname }}

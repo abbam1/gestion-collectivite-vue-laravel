@@ -168,11 +168,12 @@
 
                       <!-- Button trigger modal -->
                       <button
+                      
                         type="button"
                         class="mx-3 buttonSites"
                         @click="$router.push('/structures/'+ item.id)"
                       >
-                      <i class="fas fa-circle-info text-secondary"></i>
+                      <i class="fas fa-circle-info text-secondary" ></i>
                       </button>
                       <!-- Button trigger modal -->
 

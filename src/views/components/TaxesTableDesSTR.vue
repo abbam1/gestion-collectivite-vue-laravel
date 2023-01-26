@@ -42,7 +42,7 @@
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Période
+                      Date de début du paiement
                     </th>
                     <th
                       class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -65,12 +65,12 @@
                     </td>
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.debut_payement }}
+                        {{ item.pivot.debut_payement }}
                       </p>
                     </td>
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.pivot.montant }}
+                        {{ formatage(item.pivot.montant) }}
                       </p>
                     </td>
                     
@@ -141,7 +141,7 @@
                 >Taxe:</label
               >
               <select
-                name="taxe_id"
+                name="nom"
                 class="form-control"
               >
                 <option value="" selected>Choississez la taxe</option>
@@ -159,7 +159,6 @@
                 >Début du payement:</label
               >
               <input
-                placeholder="Ex:1-10"
                 type="date"
                 class="form-control"
                 name="debut_payement"
@@ -280,9 +279,9 @@
                 >Taxe:</label
               >
               <select
-                name="taxe_id"
+                name="nom"
                 class="form-control"
-                v-model="formData.taxe_id"
+                v-model="formData.nom"
               >
                 <option value="" selected>Choississez la taxe</option>
                 <option
@@ -387,7 +386,7 @@ export default {
       let formData = new FormData(this.$refs.addTaxesForm);
 
       this.$axios
-        .post("/structures/" + this.id_structure + "/attach/" + this.formData.taxe_id, formData)
+        .post("/structures/" + this.id_structure + "/attach/" + this.formData.nom, formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -409,7 +408,7 @@ export default {
               location.reload();
             }, 2000);
           }
-          this.formData.taxe_id ={};
+          this.formData.nom ={};
         })
         .catch((err) => {
           console.log(err);
@@ -422,12 +421,12 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
-      $("select[name=taxe_id]").val(item.nom);
-      $("input[name=debut_payement]").val(item.debut_payement);
+      $("select[name=nom]").val(item.id);
+      $("input[name=debut_payement]").val(item.pivot.debut_payement);
       $("input[name=montant]").val(item.pivot.montant);
     },
     clearInput() {
-      $("select[name=taxe_id]").val("");
+      $("select[name=nom]").val("");
       $("input[name=debut_payement]").val("");
       $("input[name=montant]").val("");   
      },
@@ -435,7 +434,7 @@ export default {
       let formData = new FormData(this.$refs.editTaxesForm);
 
       this.$axios
-        .post("/structures/" + this.id_structure + "/attach/" + this.formData.taxe_id, formData + this.idToEdit, formData)
+        .post("/structures/" + this.id_structure + "/attach/" + this.formData.nom, formData + this.idToEdit, formData)
         .then((res) => {
           let data = res.data.data;
           console.log(data);
@@ -452,7 +451,7 @@ export default {
           });
           //Fermer le modal
           // alert("OKy")
-          this.formData.taxe_id = " ";
+          this.formData.nom = " ";
           this.formData.debut_payement = " ";
           this.formData.pivot.montant = " ";
         })
@@ -559,6 +558,15 @@ export default {
         });
     },
     // Recupération des taxes global
+  
+   formatage (currency) {
+    const formatter = new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'XOF',
+    });
+    return formatter.format(currency)
+   }
+  
   },
 
   created() {
@@ -567,5 +575,8 @@ export default {
     this.getCommunes();
     this.getTaxes();
   },
+
+
+  
 };
 </script>

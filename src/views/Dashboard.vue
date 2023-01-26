@@ -113,86 +113,86 @@
     </div>
     <br />
     <div class="card px-0 pt-0 pb-2">
-      <div class="table-responsive p-0">
-        <table class="table align-items-center mb-0">
+      <div class="table-responsive pt-3 pl-5">
+        <table class="table align-items-center mb-0" id="datatable">
           <thead>
-            <tr>
-              <th
-                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                Nom
-              </th>
-              <th
-                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                Période
-              </th>
-              <th
-                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                Fréquence
-              </th>
-              <th
-                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                Montant par defaut
-              </th>
-              <th
-                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                ID Compte-taxe
-              </th>
-              <th
-                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                ID Commune
-              </th>
-              <th
-                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                Description
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in items" :key="'taxe_' + item.id">
-              <td class="ps-4">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ item.nom }}
-                </p>
-              </td>
-              <td class="text-center">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ item.periode }}
-                </p>
-              </td>
-              <td class="text-center">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ item.frequence }}
-                </p>
-              </td>
-              <td class="text-center">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ item.montant_defaut }}
-                </p>
-              </td>
-              <td class="text-center">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ item.compte_taxe_id }}
-                </p>
-              </td>
-              <td class="text-center">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ item.commune_id }}
-                </p>
-              </td>
-              <td class="text-center">
-                <span class="text-xs font-weight-bold mb-0">
-                  {{ item.description }}
-                </span>
-              </td>
-            </tr>
-          </tbody>
+                  <tr>
+                    <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Nom
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Période
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Fréquence
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Montant par defaut
+                    </th>
+                    <!-- <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      ID Compte-taxe
+                    </th>
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      ID Commune
+                    </th> -->
+                    <th
+                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in items" :key="'taxe_' + item.id">
+                    <td class="ps-4">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.nom }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.periode }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.frequence }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.montant_defaut }}
+                      </p>
+                    </td>
+                    <!-- <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.compte_taxe_id }}
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ item.commune_id }}
+                      </p>
+                    </td> -->
+                    <td class="text-center">
+                      <span class="text-xs font-weight-bold mb-0">
+                        {{ item.description }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
         </table>
       </div>
     </div>
@@ -200,6 +200,7 @@
 </template>
 <script>
 import MiniStatisticsCard from "@/examples/Cards/MiniStatisticsCard.vue";
+import $ from "jquery";
 
 import {
   faUsers,
@@ -231,6 +232,15 @@ export default {
         .get("/taxes")
         .then((res) => {
           this.items = res.data.data;
+          $(document).ready(function () {
+            $("#datatable").DataTable({
+              destroy: true,
+              language: {
+                url:
+                  "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json",
+              },
+            });
+          });
         })
         .catch((err) => {
           console.log(err);
