@@ -2043,6 +2043,7 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
+      if (item) {
       $("select[name=civilite]").val(item.civilite);
       $("input[name=nom]").val(item.nom);
       $("input[name=prenoms]").val(item.prenoms);
@@ -2063,6 +2064,7 @@ export default {
       $("input[name=mere]").val(item.mere);
       $("input[name=email]").val(item.email);
       $("input[name=code]").val(item.code);
+      }
     },
     clearInput() {
       $("select[name=civilite]").val("");

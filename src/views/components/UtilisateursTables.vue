@@ -664,6 +664,7 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
+      if (item) {
       $("input[name=nom]").val(item.nom);
       $("input[name=prenoms]").val(item.prenoms);
       $("input[name=matricule]").val(item.matricule);
@@ -673,6 +674,7 @@ export default {
       $("input[name=password_confirmation]").val(item.password_confirmation);
       $("select[name=commune_id]").val(item.commune_id);
       $("select[name=role]").val(item.roles[0].name);
+      }
     },
     clearInput() {
       $("input[name=nom]").val("");

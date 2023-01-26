@@ -238,19 +238,12 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Commune:</label
-              >
-              <select name="commune_id" class="form-control">
-                <option value="" selected>Choississez l'id</option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+                <input
+                type="hidden"
+                name="commune_id"
+                class="form-control"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label"
@@ -432,23 +425,12 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Commune:</label
-              >
-              <select
+                <input
+                type="hidden"
                 name="commune_id"
                 class="form-control"
-                v-model="formData.commune_id"
-              >
-                <option value="" selected>Choississez l'id</option>
-                <option
-                  v-for="item in listCommunes"
-                  :key="'commune_' + item.id"
-                  :value="item.id"
+                :value="this.$store.state.user.data.commune_id"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label"
@@ -562,6 +544,7 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
+      if (item) {
       $("input[name=nom]").val(item.nom);
       $("select[id=periode]").val(item.periode);
       $("input[name=frequence]").val(item.frequence);
@@ -569,6 +552,7 @@ export default {
       $("select[name=compte_taxe_id]").val(item.compte_taxe_id);
       $("select[name=commune_id]").val(item.commune_id);
       $("textarea[name=description]").val(item.description);
+      }
     },
     clearInput() {
       $("input[name=nom]").val("");

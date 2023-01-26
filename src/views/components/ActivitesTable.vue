@@ -373,8 +373,10 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
+      if (item) {
       $("input[name=nom]").val(item.nom);
       $("textarea[name=description]").val(item.description);
+      }
     },
     clearInput() {
       $("input[name=nom]").val("");

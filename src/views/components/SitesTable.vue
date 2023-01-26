@@ -421,10 +421,12 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
+      if (item) {
       $("input[name=nom]").val(item.nom);
       $("input[name=description]").val(item.description);
       $("input[name=geolocalisation]").val(item.geolocalisation);
       $("input[name=commune_id]").val(item.commune_id);
+      }
     },
     clearInput() {
       $("input[name=nom]").val("");

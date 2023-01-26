@@ -432,10 +432,12 @@
       },
       setEdit(id, item) {
         this.idToEdit = id;
+        if (item) {
         $("input[name=numero]").val(item.numero);
         $("input[name=num_tremo]").val(item.num_tremo);
         $("select[name=contribuable_id]").val(item.contribuable_id);
         $("select[name=commune_id]").val(item.commune_id);
+        }
       },
       clearInput() {
         $("input[name=numero]").val("");

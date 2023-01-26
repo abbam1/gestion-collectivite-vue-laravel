@@ -427,9 +427,11 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
+      if (item) {
       $("select[name=nom]").val(item.nom);
       $("input[name=superficie]").val(item.superficie);
       $("textarea[name=geolocalisation]").val(item.geolocalisation);
+      }
     },
     clearInput() {
       $("select[name=nom]").val("");

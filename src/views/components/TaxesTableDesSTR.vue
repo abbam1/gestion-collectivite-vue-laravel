@@ -421,9 +421,11 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
+      if (item) {
       $("select[name=nom]").val(item.id);
       $("input[name=debut_payement]").val(item.pivot.debut_payement);
       $("input[name=montant]").val(item.pivot.montant);
+      }
     },
     clearInput() {
       $("select[name=nom]").val("");

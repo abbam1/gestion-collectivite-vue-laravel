@@ -427,10 +427,12 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
+      if (item) {
       $("input[name=type]").val(item.type);
       $("input[name=nom]").val(item.nom);
       $("input[name=valeur]").val(item.valeur);
       $("input[name=commune_id]").val(item.commune_id);
+      }
     },
     clearInput() {
       $("input[name=type]").val("");

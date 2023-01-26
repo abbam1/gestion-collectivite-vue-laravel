@@ -96,7 +96,7 @@
                       >
                         <i class="fas fa-user-edit text-secondary"></i>
                       </button>
-                      <!-- Button trigger modal -->
+                      <!-- Button trigger modal supprimer -->
                       <span>
                         <button
                           data-bs-toggle="modal"
@@ -403,9 +403,12 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
-      $("input[name=nom]").val(item.nom);
-      $("input[name=code]").val(item.code);
-      $("input[name=commune_id]").val(item.commune_id);
+      if (item) {
+        $("input[name=nom]").val(item.nom);
+        $("input[name=code]").val(item.code);
+        $("input[name=commune_id]").val(item.commune_id);
+      }
+      
     },
     clearInput() {
       $("input[name=nom]").val("");

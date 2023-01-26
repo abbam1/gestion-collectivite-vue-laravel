@@ -771,6 +771,7 @@ export default {
     },
     setEdit(id, item) {
       this.idToEdit = id;
+      if (item) {
       $("input[name=nom]").val(item.nom);
       $("input[name=email]").val(item.email);
       $("input[name=chiffre_affaire]").val(item.chiffre_affaire);
@@ -783,6 +784,7 @@ export default {
       $("select[name=contribuable_id]").val(item.contribuable_id);
       $("select[name=site_id]").val(item.site_id);
       $("select[name=activite_id]").val(item.activite_id);
+      }
     },
     clearInput() {
       $("input[name=nom]").val("");
