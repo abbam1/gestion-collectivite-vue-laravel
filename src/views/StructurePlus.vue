@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="container-fluid">
     <div
       class="mt-4 page-header min-height-300 border-radius-xl"
@@ -64,7 +65,7 @@
             </li>
             <li class="text-sm border-0 list-group-item ps-0">
               <strong class="text-dark">Chiffres d'affaire:</strong> &nbsp;
-              {{ item.chiffre_affaire }}
+              {{ formatage(item.chiffre_affaire) }}
             </li>
             <li class="text-sm border-0 list-group-item ps-0">
               <strong class="text-dark">Géolocalisation:</strong> &nbsp; {{ item.geolocalisation }}
@@ -313,6 +314,7 @@
       </div>
     </div>
   </div>
+</div>
   <!-- Modal pour modifier -->
 
 
@@ -490,7 +492,15 @@ export default {
     },
     // Recupération des activités
   
-
+//formatage en XOF    
+formatage (currency) {
+    const formatter = new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'XOF',
+    });
+    return formatter.format(currency)
+   }
+//formatage en XOF
   },
 
   mounted() {

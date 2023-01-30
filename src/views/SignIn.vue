@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="container top-0 position-sticky z-index-sticky">
     <div class="row">
       <div class="col-12">
@@ -91,6 +92,7 @@
     </section>
   </main>
   <app-footer />
+</div>
 </template>
 
 <script>
@@ -160,9 +162,7 @@ export default {
               timerProgressBar: true,
               didOpen: () => {
                 Swal.showLoading();
-                const b = Swal.getHtmlContainer().querySelector("b");
                 timerInterval = setInterval(() => {
-                  b.textContent = Swal.getTimerLeft();
                 }, 100);
               },
               willClose: () => {

@@ -37,7 +37,7 @@ const routes = [
     name: "Contribuable",
     component: ContribuablePlus,
     meta: {requireAuth : true},
-    props: route =>({id:route.params.id})
+    props: route =>({id:+route.params.id})
 
   },
   {
@@ -45,7 +45,7 @@ const routes = [
     name: "structure",
     component: StructurePlus,
     meta: {requireAuth : true},
-    props: route =>({id:route.params.id})
+    props: route =>({id:+route.params.id})
 
   },
   
@@ -54,7 +54,7 @@ const routes = [
     name: "ComptesTaxesPlus",
     component: ComptesTaxesPlus,
     meta: {requireAuth : true},
-    props: route =>({id:route.params.id})
+    props: route =>({id:+route.params.id})
 
   },
   

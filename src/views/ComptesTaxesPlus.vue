@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="container-fluid">
     <div
       class="mt-4 page-header min-height-300 border-radius-xl"
@@ -37,7 +38,7 @@
                         data-bs-target="#exampleModal3"
                         data-bs-original-title="Edit user"
                       >
-                  +&nbsp; Modifier les Informtions
+                  +&nbsp; Modifier les Informations
                 </button>
                 <!-- Button trigger modal -->
           </div>
@@ -149,7 +150,7 @@
   </div>
   <!-- Modal pour modifier -->
 
-
+</div>
 
 
 </template>

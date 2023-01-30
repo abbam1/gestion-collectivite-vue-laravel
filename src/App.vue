@@ -1,4 +1,5 @@
 <template>
+  <div>
   <sidenav
     :custom_class="this.$store.state.mcolor"
     :class="[
@@ -22,6 +23,7 @@
     <app-footer v-show="this.$store.state.showFooter" />
     
   </main>
+</div>
 </template>
 <script>
 import Sidenav from "./examples/Sidenav";

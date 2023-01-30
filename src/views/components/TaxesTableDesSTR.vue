@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="main-content">
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
@@ -338,6 +339,7 @@
     </div>
   </div>
   <!--Modal pour ajouter-->
+</div>
 </template>
 
 <style>

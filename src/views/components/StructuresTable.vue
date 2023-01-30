@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="main-content">
     <div class="alert alert-secondary1 mx-4" role="alert">
       <span class="text-white"
@@ -116,7 +117,7 @@
                     </td> -->
                     <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ item.chiffre_affaire }}
+                        {{ formatage(item.chiffre_affaire) }}
                       </p>
                     </td>
                     <!-- <td class="text-center">
@@ -677,6 +678,7 @@
     </div>
   </div>
   <!--Modal pour ajouter-->
+</div>
 </template>
 
 <style>
@@ -939,6 +941,17 @@ export default {
         });
     },
     // Recupération des contribuables
+
+    //formatage en XOF    
+    formatage (currency) {
+    const formatter = new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'XOF',
+    });
+    return formatter.format(currency)
+   }
+//formatage en XOF
+
   },
 
   // initialiser les données recupérer en get

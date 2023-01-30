@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="container-fluid">
     <div
       class="mt-4 page-header min-height-300 border-radius-xl"
@@ -962,7 +963,7 @@
   </div>
   <!-- Modal pour modifier -->
 
-
+</div>
 
 
 </template>

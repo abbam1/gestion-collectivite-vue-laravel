@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="main-content">
     <SoftAlert v-show="showAlertSuccess" icon="fa fa-check" dismissible>
       <p>Commune enregistrée avec succès</p>
@@ -277,6 +278,7 @@
     </div>
   </div>
   <!--Modal pour ajouter-->
+</div>
 </template>
 
 <style>
