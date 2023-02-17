@@ -186,6 +186,10 @@
         <div class="modal-body">
           <form ref="editContribuablesForm" @submit.prevent="editForm">
             <input type="hidden" name="_method" value="put" />
+            <step1 v-show="step === 1">
+              <div class="d-flex justify-content-center">
+                  <h2>①/⑤</h2>
+                </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Civilité:</label>
               <select
@@ -234,6 +238,12 @@
                 name="date_naissance"
                 id="recipient-name"
               />
+            </div>
+          </step1>
+          <!--end step1-->
+          <step2 v-show="step === 2">
+          <div class="d-flex justify-content-center">
+              <h2>②/⑤</h2>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
@@ -539,6 +549,12 @@
                 id="recipient-name"
               />
             </div>
+          </step2>
+          <!--end step2-->
+          <step3 v-show="step === 3">
+            <div class="d-flex justify-content-center">
+                <h2>③/⑤</h2>
+              </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Pays de résidence:</label
@@ -843,6 +859,12 @@
                 id="recipient-name"
               />
             </div>
+          </step3>
+            <!--end step3-->
+            <step4 v-show="step === 4">
+              <div class="d-flex justify-content-center">
+                  <h2>④/⑤</h2>
+                </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Tel no1:</label
@@ -891,6 +913,12 @@
                 id="recipient-name"
               />
             </div>
+          </step4>
+            <!--end step4-->
+            <step5 v-show="step === 5">
+              <div class="d-flex justify-content-center">
+                  <h2>⑤/⑤</h2>
+                </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Père:</label
@@ -939,6 +967,8 @@
                 id="recipient-name"
               />
             </div>
+          </step5>
+            <!--end step5-->
             <div class="modal-footer">
               <button
                 type="button"
@@ -949,12 +979,26 @@
                 Fermer
               </button>
               <button
-                type="submit"
-                class="btn bg-gradient-primary"
-                data-bs-dismiss="modal"
-              >
-                Modifier
-              </button>
+                  class="btn bg-gradient-primary"
+                  v-if="step > 1"
+                  @click.prevent="step--"
+                >
+                  Précédent
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step < 5"
+                  @click.prevent="step++"
+                >
+                  Suivant
+                </button>
+                <button
+                  type="submit"
+                  class="btn bg-gradient-primary"
+                  v-if="step === 5"
+                >
+                  Modifier
+                </button>
             </div>
           </form>
         </div>
@@ -1004,6 +1048,7 @@ export default {
       img1,
       img2,
       img3,
+      step:1,
     };
   },
   methods: {

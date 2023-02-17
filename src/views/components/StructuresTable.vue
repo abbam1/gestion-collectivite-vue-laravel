@@ -216,198 +216,244 @@
 
   <!-- Modal pour modifier -->
   <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Modifier une structure
-          </h5>
-          <button
-            type="button"
-            class="btn-close text-dark"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form ref="editStructuresForm" @submit.prevent="editForm">
-            <input type="hidden" name="_method" value="put" />
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nom:</label>
-              <input
-                type="text"
-                class="form-control"
-                name="nom"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Email:</label>
-              <input
-                type="email"
-                class="form-control"
-                name="email"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Chiffre d'affaire(CFA):</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="chiffre_affaire"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Localisation:</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="geolocalisation"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Taille:</label>
-              <select class="form-control" name="taille" id="recipient-name">
-                <option value="grande surface">Grande surface</option>
-                <option Value="moyenne surface">Moyenne surface</option>
-                <option Value="magasin">Magasin</option>
-                <option Value="petit magasin">Petit magasin</option>
-                <option Value="sous auvent">Sous auvent</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Êtes-vous soumis à un impôt Synthétique?</label
-              >
-              <select
-                class="form-control"
-                name="impot_synthetique"
-                id="recipient-name"
-              >
-                <option value="1">Oui</option>
-                <option value="0">Non</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Exercez-vous dans un centre commercial?</label
-              >
-              <select
-                class="form-control"
-                name="centre_commercial"
-                id="recipient-name"
-              >
-                <option value="1">Oui</option>
-                <option value="0">Non</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Adresse:</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="adresse"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Fonction:</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="fonction"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Contribuable:</label
-              >
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Modifier une structure
+            </h5>
+            <button
+              type="button"
+              class="btn-close text-dark"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form ref="editStructuresForm" @submit.prevent="editForm">
+              <input type="hidden" name="_method" value="put" />
+              <!--step1-->
+              <step1 v-show="step === 1">
+                <div class="d-flex justify-content-center">
+                  <h2>	①/③</h2>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                  >Nom:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="nom"
+                    id="recipient-name"
+                  />
+                </div>
 
-              <select name="contribuable_id" class="form-control">
-                <option value="">Choississez l'id</option>
-                <option
-                  v-for="item in listContribuables"
-                  :key="'contribuable_' + item.id"
-                  :value="item.id"
-                >
-                  {{ item.nom }}
-                </option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Site:</label
-              >
-              <select name="site_id" class="form-control">
-                <option value="">Choississez l'id</option>
-                <option
-                  v-for="item in listSites"
-                  :key="'site_' + item.id"
-                  :value="item.id"
-                >
-                  {{ item.nom }}
-                </option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Activité:</label
-              >
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Email:</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    id="recipient-name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Chiffre d'affaire(CFA):</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="chiffre_affaire"
+                    id="recipient-name"
+                  />
+                </div>
+              </step1>
 
-              <select name="activite_id" class="form-control">
-                <option value="">Choississez l'id</option>
-                <option
-                  v-for="item in listActivites"
-                  :key="'activite_' + item.id"
-                  :value="item.id"
+              <!--end step1-->
+
+              <step2 v-show="step === 2">
+                <div class="d-flex justify-content-center">
+                  <h2>	②/③ </h2>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Localisation:</label
+                    >
+                    <input
+                    type="text"
+                    class="form-control"
+                    name="geolocalisation"
+                    id="recipient-name"
+                    />
+                  </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Taille:</label
+                  >
+                  <select
+                    class="form-control"
+                    name="taille"
+                    id="recipient-name"
+                  >
+                    <option value="grande surface">Grande surface</option>
+                    <option Value="moyenne surface">Moyenne surface</option>
+                    <option Value="magasin">Magasin</option>
+                    <option Value="petit magasin">Petit magasin</option>
+                    <option Value="sous auvent">Sous auvent</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Êtes-vous soumis à un impôt Synthétique?</label
+                  >
+                  <select
+                    class="form-control"
+                    name="impot_synthetique"
+                    id="recipient-name"
+                  >
+                  <option value="1">Oui</option>
+                    <option value="0">Non</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Exercez-vous dans un centre commercial?</label
+                  >
+                  <select
+                    class="form-control"
+                    name="centre_commercial"
+                    id="recipient-name"
+                  >
+                    <option value="1">Oui</option>
+                    <option value="0">Non</option>
+                  </select>
+                </div>
+              </step2>
+              <!--end step2-->
+              <step3 v-show="step === 3">
+                <div class="d-flex justify-content-center">
+                  <h2>	③/③ </h2>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Adresse:</label
+                  >
+                  <input
+                  type="text"
+                    class="form-control"
+                    name="adresse"
+                    id="recipient-name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Fonction:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="fonction"
+                    id="recipient-name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >ID Contribuable:</label
+                  >
+
+                  <select name="contribuable_id" class="form-control">
+                    <option value="">Choississez l'id</option>
+                    <option
+                      v-for="item in listContribuables"
+                      :key="'contribuable_' + item.id"
+                      :value="item.id"
+                    >
+                      {{ item.nom }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >ID Site:</label
+                  >
+                  <select name="site_id" class="form-control">
+                    <option value="">Choississez l'id</option>
+                    <option
+                      v-for="item in listSites"
+                      :key="'site_' + item.id"
+                      :value="item.id"
+                    >
+                      {{ item.nom }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >ID Activité:</label
+                  >
+
+                  <select name="activite_id" class="form-control">
+                    <option value="">Choississez l'id</option>
+                    <option
+                      v-for="item in listActivites"
+                      :key="'activite_' + item.id"
+                      :value="item.id"
+                    >
+                      {{ item.nom }}
+                    </option>
+                  </select>
+                </div>
+              </step3>
+              <!--end step3-->
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  ref="modalDismiss"
+                  class="btn bg-gradient-secondary"
+                  data-bs-dismiss="modal"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                ref="closeUpdate"
-                class="btn bg-gradient-secondary"
-                data-bs-dismiss="modal"
-              >
-                Fermer
-              </button>
-              <button
-                type="submit"
-                class="btn bg-gradient-primary"
-                data-bs-dismiss="modal"
-              >
-                Modifier
-              </button>
-            </div>
-          </form>
+                  Fermer
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step > 1"
+                  @click.prevent="step--"
+                >
+                  Précédent
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step < 3"
+                  @click.prevent="step++"
+                >
+                  Suivant
+                </button>
+                <button
+                  type="submit"
+                  class="btn bg-gradient-primary"
+                  v-if="step === 3"
+                >
+                  Modifier
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   <!-- Modal pour modifier -->
 
   <!--Modal pour Supprimer-->
@@ -463,143 +509,169 @@
 
   <!--Modal pour ajouter-->
   <div
-    class="modal fade"
-    id="exampleModalMessage"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalMessageTitle"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Ajouter une structure
-          </h5>
-          <button
-            type="button"
-            class="btn-close text-dark"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
+      class="modal fade"
+      id="exampleModalMessage"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalMessageTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Ajouter une structure
+            </h5>
+            <button
+              type="button"
+              class="btn-close text-dark"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
 
-        <div class="modal-body">
-          <form ref="addStructuresForm" @submit.prevent="addForm">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nom:</label>
-              <input
-                v-model="formData.nom"
-                type="text"
-                class="form-control"
-                name="nom"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Email:</label>
-              <input
-                v-model="formData.email"
-                type="email"
-                class="form-control"
-                name="email"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Chiffre d'affaire (CFA):</label
-              >
-              <input
-                v-model="formData.chiffre_affaire"
-                type="number"
-                class="form-control"
-                name="chiffre_affaire"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Localisation:</label
-              >
-              <input
-                v-model="formData.geolocalisation"
-                type="text"
-                class="form-control"
-                name="geolocalisation"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Taille:</label>
-              <select
-                v-model="formData.taille"
-                class="form-control"
-                name="taille"
-                id="recipient-name"
-              >
-                <option value="grande surface">Grande surface</option>
-                <option Value="moyenne surface">Moyenne surface</option>
-                <option Value="magasin">Magasin</option>
-                <option Value="petit magasin">Petit magasin</option>
-                <option Value="sous auvent">Sous auvent</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Êtes-vous soumis à un impôt Synthétique?</label
-              >
-              <select
-                v-model="formData.impot_synthetique"
-                class="form-control"
-                name="impot_synthetique"
-                id="recipient-name"
-              >
-                <option value="1">Oui</option>
-                <option value="0">Non</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Exercez-vous dans un centre commercial?</label
-              >
-              <select
-                v-model="formData.centre_commercial"
-                class="form-control"
-                name="centre_commercial"
-                id="recipient-name"
-              >
-                <option value="1">Oui</option>
-                <option value="0">Non</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Adresse:</label
-              >
-              <input
-                v-model="formData.adresse"
-                type="text"
-                class="form-control"
-                name="adresse"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Fonction:</label
-              >
-              <input
-                v-model="formData.fonction"
-                type="text"
-                class="form-control"
-                name="fonction"
-                id="recipient-name"
-              />
-            </div>
-            <!-- <div class="form-group">
+          <div class="modal-body">
+            <form ref="addStructuresForm" @submit.prevent="addForm">
+              <!--step1-->
+              <step1 v-show="step === 1">
+                <div class="d-flex justify-content-center">
+                  <h2>	①/③</h2>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                  >Nom:</label
+                  >
+                  <input
+                    v-model="formData.nom"
+                    type="text"
+                    class="form-control"
+                    name="nom"
+                    id="recipient-name"
+                    />
+                  </div>
+                  <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Email:</label
+                  >
+                  <input
+                  v-model="formData.email"
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    id="recipient-name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Chiffre d'affaire (CFA):</label
+                  >
+                  <input
+                    v-model="formData.chiffre_affaire"
+                    type="number"
+                    class="form-control"
+                    name="chiffre_affaire"
+                    id="recipient-name"
+                  />
+                </div>
+              </step1>
+              <!-- End step 1 -->
+
+              <step2 v-show="step === 2">
+                <div class="d-flex justify-content-center">
+                  <h2>	②/③ </h2>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                  >Localisation:</label
+                  >
+                  <input
+                  v-model="formData.geolocalisation"
+                    type="text"
+                    class="form-control"
+                    name="geolocalisation"
+                    id="recipient-name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Taille:</label
+                  >
+                  <select
+                    v-model="formData.taille"
+                    class="form-control"
+                    name="taille"
+                    id="recipient-name"
+                  >
+                    <option value="grande surface">Grande surface</option>
+                    <option Value="moyenne surface">Moyenne surface</option>
+                    <option Value="magasin">Magasin</option>
+                    <option Value="petit magasin">Petit magasin</option>
+                    <option Value="sous auvent">Sous auvent</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Êtes-vous soumis à un impôt Synthétique?</label
+                  >
+                  <select
+                    v-model="formData.impot_synthetique"
+                    class="form-control"
+                    name="impot_synthetique"
+                    id="recipient-name"
+                  >
+                    <option value="1">Oui</option>
+                    <option value="0">Non</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Exercez-vous dans un centre commercial?</label
+                  >
+                  <select
+                    v-model="formData.centre_commercial"
+                    class="form-control"
+                    name="centre_commercial"
+                    id="recipient-name"
+                  >
+                    <option value="1">Oui</option>
+                    <option value="0">Non</option>
+                  </select>
+                </div>
+              </step2>
+              <!-- End step 2 -->
+              
+              <step3 v-show="step === 3">
+                <div class="d-flex justify-content-center">
+                  <h2>	③/③ </h2>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Adresse:</label
+                  >
+                  <input
+                    v-model="formData.adresse"
+                    type="text"
+                    class="form-control"
+                    name="adresse"
+                    id="recipient-name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >Fonction:</label
+                  >
+                  <input
+                    v-model="formData.fonction"
+                    type="text"
+                    class="form-control"
+                    name="fonction"
+                    id="recipient-name"
+                  />
+                </div>
+                <!-- <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >ID Contribuable:</label
               >
@@ -619,64 +691,87 @@
                 </option>
               </select>
             </div> -->
-            <input type="hidden" :value="id_contribuable" name="contribuable_id"/>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Site:</label
-              >
-              <select
-                name="site_id"
-                class="form-control"
-                v-model="formData.site_id"
-              >
-                <option value="" selected>Choississez l'id</option>
-                <option
-                  v-for="item in listSites"
-                  :key="'site_' + item.id"
-                  :value="item.id"
-                >
-                  {{ item.nom }}
-                </option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >ID Activité:</label
-              >
+                <input
+                  type="hidden"
+                  :value="id_contribuable"
+                  name="contribuable_id"
+                />
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >ID Site:</label
+                  >
+                  <select
+                    name="site_id"
+                    class="form-control"
+                    v-model="formData.site_id"
+                  >
+                    <option value="" selected>Choississez l'id</option>
+                    <option
+                      v-for="item in listSites"
+                      :key="'site_' + item.id"
+                      :value="item.id"
+                    >
+                      {{ item.nom }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label"
+                    >ID Activité:</label
+                  >
 
-              <select
-                name="activite_id"
-                class="form-control"
-                v-model="formData.activite_id"
-              >
-                <option value="" selected>Choississez l'id</option>
-                <option
-                  v-for="item in listActivites"
-                  :key="'activite_' + item.id"
-                  :value="item.id"
+                  <select
+                    name="activite_id"
+                    class="form-control"
+                    v-model="formData.activite_id"
+                  >
+                    <option value="" selected>Choississez l'id</option>
+                    <option
+                      v-for="item in listActivites"
+                      :key="'activite_' + item.id"
+                      :value="item.id"
+                    >
+                      {{ item.nom }}
+                    </option>
+                  </select>
+                </div>
+              </step3>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  ref="modalDismiss"
+                  class="btn bg-gradient-secondary"
+                  data-bs-dismiss="modal"
                 >
-                  {{ item.nom }}
-                </option>
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                ref="modalDismiss"
-                class="btn bg-gradient-secondary"
-                data-bs-dismiss="modal"
-              >
-                Fermer
-              </button>
-              <button type="submit" class="btn bg-gradient-primary">
-                Ajouter
-              </button>
-            </div>
-          </form>
+                  Fermer
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step > 1"
+                  @click.prevent="step--"
+                >
+                  Précédent
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step < 3"
+                  @click.prevent="step++"
+                >
+                  Suivant
+                </button>
+                <button
+                  type="submit"
+                  class="btn bg-gradient-primary"
+                  v-if="step === 3"
+                >
+                  Ajouter
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   <!--Modal pour ajouter-->
 </div>
 </template>
@@ -720,6 +815,7 @@ export default {
       listActivites: [],
       listContribuables: [],
       formData: {},
+      step:1,
     };
   },
   methods: {

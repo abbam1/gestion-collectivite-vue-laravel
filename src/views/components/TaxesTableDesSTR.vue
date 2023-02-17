@@ -381,6 +381,7 @@ export default {
       listTaxes: [],
       items: [],
       formData: {},
+      step:1,
     };
   },
   methods: {

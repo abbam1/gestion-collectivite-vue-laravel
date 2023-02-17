@@ -102,6 +102,7 @@ if (user) {
       .catch((err) => {
         console.log(err)
         store.state.user = {}
+        localStorage.removeItem('collectivite_user')
       })
   } catch (err) {
     console.log(err);

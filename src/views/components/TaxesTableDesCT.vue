@@ -176,6 +176,7 @@
         <div class="modal-body">
           <form ref="editTaxesForm" @submit.prevent="editForm">
             <input type="hidden" name="_method" value="put" />
+            <step1 v-show="step === 1">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
               <input
@@ -208,6 +209,9 @@
                 id="recipient-name"
               />
             </div>
+            </step1>
+
+            <step2 v-show="step === 2">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Montant par defaut:</label
@@ -256,23 +260,38 @@
                 name="description"
               ></textarea>
             </div>
+            </step2>
             <div class="modal-footer">
-              <button
-                type="button"
-                ref="closeUpdate"
-                class="btn bg-gradient-secondary"
-                data-bs-dismiss="modal"
-              >
-                Fermer
-              </button>
-              <button
-                type="submit"
-                class="btn bg-gradient-primary"
-                data-bs-dismiss="modal"
-              >
-                Modifier
-              </button>
-            </div>
+                <button
+                  type="button"
+                  ref="modalDismiss"
+                  class="btn bg-gradient-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Fermer
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step > 1"
+                  @click.prevent="step--"
+                >
+                  Précédent
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step < 2"
+                  @click.prevent="step++"
+                >
+                  Suivant
+                </button>
+                <button
+                  type="submit"
+                  class="btn bg-gradient-primary"
+                  v-if="step === 2"
+                >
+                  Modifier
+                </button>
+              </div>
           </form>
         </div>
       </div>
@@ -353,6 +372,7 @@
         </div>
         <div class="modal-body">
           <form ref="addTaxesForm" @submit.prevent="addForm">
+            <step1 v-show="step === 1">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
               <input
@@ -393,6 +413,8 @@
                 id="recipient-name"
               />
             </div>
+            </step1>
+            <step2 v-show="step === 2">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Montant par defaut:</label
@@ -444,19 +466,38 @@
                 name="description"
               ></textarea>
             </div>
+            </step2>
             <div class="modal-footer">
-              <button
-                type="button"
-                ref="modalDismiss"
-                class="btn bg-gradient-secondary"
-                data-bs-dismiss="modal"
-              >
-                Fermer
-              </button>
-              <button type="submit" class="btn bg-gradient-primary">
-                Ajouter
-              </button>
-            </div>
+                <button
+                  type="button"
+                  ref="modalDismiss"
+                  class="btn bg-gradient-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Fermer
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step > 1"
+                  @click.prevent="step--"
+                >
+                  Précédent
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step < 2"
+                  @click.prevent="step++"
+                >
+                  Suivant
+                </button>
+                <button
+                  type="submit"
+                  class="btn bg-gradient-primary"
+                  v-if="step === 2"
+                >
+                  Modifier
+                </button>
+              </div>
           </form>
         </div>
       </div>
@@ -498,6 +539,7 @@ export default {
       listCommunes: [],
       items: [],
       formData: {},
+      step:1,
     };
   },
   methods: {

@@ -209,60 +209,110 @@
         </div>
         <div class="modal-body">
           <form ref="editUsersForm" @submit.prevent="editForm">
+             <!--step1-->
+          <step1 v-show="step === 1">
             <input type="hidden" name="_method" value="put" />
+            <div class="d-flex justify-content-center">
+
+            <h2>①/③</h2>
+            </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nom:</label>
+              <label for="recipient-nom" class="col-form-label">Nom:</label>
               <input
                 type="text"
                 class="form-control"
                 name="nom"
-                id="recipient-name"
+                id="recipient-nom"
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
+              <label for="recipient-prenom" class="col-form-label"
                 >Prénoms:</label
               >
               <input
                 type="text"
                 class="form-control"
                 name="prenoms"
-                id="recipient-name"
+                id="recipient-prenom"
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
+              <label for="recipient-matricule" class="col-form-label"
                 >Matricule:</label
               >
               <input
                 type="text"
                 class="form-control"
                 name="matricule"
-                id="recipient-name"
+                id="recipient-matricule"
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Email:</label>
+              <label for="recipient-email" class="col-form-label">Email:</label>
               <input
                 type="text"
                 class="form-control"
                 name="email"
-                id="recipient-name"
+                id="recipient-email"
               />
             </div>
+          </step1>
+            <!--end step1-->
+            <step2 v-show="step === 2">
+              <div class="d-flex justify-content-center">
+
+<h2>②/③</h2>
+</div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
+              <label for="recipient-contact" class="col-form-label"
                 >Contact:</label
               >
               <input
                 type="text"
                 class="form-control"
                 name="contacts"
-                id="recipient-name"
+                id="recipient-contact"
               />
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
+              <label for="recipient-poste" class="col-form-label">Poste:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="post"
+                id="recipient-poste"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="hidden"
+                name="commune_id"
+                class="form-control"
+                :value="this.$store.state.user.data.commune_id"
+                >
+            </div>
+            <div class="form-group">
+              <label for="recipient-role" class="col-form-label">Roles:</label>
+              <select name="role" class="form-control" id="recipient-role">
+                <option value="">Choississez le rôle ⇩</option>
+                <option
+                  v-for="item in listRoles"
+                  :key="'roles_' + item.id"
+                  :value="item.name"
+                >
+                  {{ item.fullname }}
+                </option>
+              </select>
+            </div>
+          </step2>
+          <!--end step2-->
+
+          <step3 v-show="step === 3">
+            <div class="d-flex justify-content-center">
+                <h2>③/③</h2>
+              </div>
+            <div class="form-group">
+              <label for="password-field" class="col-form-label"
                 >Mot de passe:</label
               >
               <div class="mot-de-passe">
@@ -278,7 +328,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
+              <label for="password-field1" class="col-form-label"
                 >Confirmer Mot de passe:</label
               >
               <div class="mot-de-passe">
@@ -286,43 +336,14 @@
                   :type="showPwd ? 'text' : 'password'"
                   class="form-control"
                   name="password_confirmation"
-                  id="password-field"
+                  id="password-field1"
                 /><span
                   class="fa fa-fw fa-eye field-icon toggle-password"
                   @click="showPwd = !showPwd"
                 ></span>
               </div>
             </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Poste:</label>
-              <input
-                type="text"
-                class="form-control"
-                name="post"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <input
-                type="hidden"
-                name="commune_id"
-                class="form-control"
-                :value="this.$store.state.user.data.commune_id"
-                >
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Roles:</label>
-              <select name="role" class="form-control">
-                <option value="">Choississez le rôle ⇩</option>
-                <option
-                  v-for="item in listRoles"
-                  :key="'roles_' + item.id"
-                  :value="item.name"
-                >
-                  {{ item.fullname }}
-                </option>
-              </select>
-            </div>
+            </step3>
             <div class="modal-footer">
               <button
                 type="button"
@@ -333,13 +354,26 @@
                 Fermer
               </button>
               <button
-                type="submit"
-                class="btn bg-gradient-primary"
-                data-bs-dismiss="modal"
-              >
-                Modifier
-              </button>
-            </div>
+                  class="btn bg-gradient-primary"
+                  v-if="step > 1"
+                  @click.prevent="step--"
+                >
+                  Précédent
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step < 3"
+                  @click.prevent="step++"
+                >
+                  Suivant
+                </button>
+                <button
+                  type="submit"
+                  class="btn bg-gradient-primary"
+                  v-if="step === 3"
+                >
+                  Modifier
+                </button>            </div>
           </form>
         </div>
       </div>
@@ -424,6 +458,12 @@
         </div>
         <div class="modal-body">
           <form ref="addUsersForm" @submit.prevent="addForm">
+             <!--step1-->
+             <step1 v-show="step === 1">
+              <div class="d-flex justify-content-center">
+
+              <h2>①/③</h2>
+              </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nom:</label>
               <input
@@ -468,6 +508,14 @@
                 id="recipient-name"
               />
             </div>
+          </step1>
+            <!--end step1-->
+            <step2 v-show="step === 2">
+              <div class="d-flex justify-content-center">
+
+              <h2>②/③</h2>
+              </div>
+
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Contact:</label
@@ -480,6 +528,43 @@
                 id="recipient-name"
               />
             </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Poste:</label>
+              <input
+                v-model="formData.post"
+                type="text"
+                class="form-control"
+                name="post"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="hidden"
+                name="commune_id"
+                class="form-control"
+                :value="this.$store.state.user.data.commune_id"
+                >
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Role:</label>
+              <select name="role" class="form-control" v-model="formData.role">
+                <option value="">Choississez le rôle ⇩</option>
+                <option
+                  v-for="item in listRoles"
+                  :key="'roles_' + item.id"
+                  :value="item.name"
+                >
+                  {{ item.fullname }}
+                </option>
+              </select>
+            </div>
+            </step2>
+            <!---end step2-->
+            <step3 v-show="step === 3">
+            <div class="d-flex justify-content-center">
+                <h2>③/③</h2>
+              </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Mot de passe:</label
@@ -514,37 +599,8 @@
                 ></span>
               </div>
             </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Poste:</label>
-              <input
-                v-model="formData.post"
-                type="text"
-                class="form-control"
-                name="post"
-                id="recipient-name"
-              />
-            </div>
-            <div class="form-group">
-              <input
-                type="hidden"
-                name="commune_id"
-                class="form-control"
-                :value="this.$store.state.user.data.commune_id"
-                >
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Role:</label>
-              <select name="role" class="form-control" v-model="formData.role">
-                <option value="">Choississez le rôle ⇩</option>
-                <option
-                  v-for="item in listRoles"
-                  :key="'roles_' + item.id"
-                  :value="item.name"
-                >
-                  {{ item.fullname }}
-                </option>
-              </select>
-            </div>
+            </step3>
+            <!--end step 3-->
             <div class="modal-footer">
               <button
                 type="button"
@@ -554,9 +610,27 @@
               >
                 Fermer
               </button>
-              <button type="submit" class="btn bg-gradient-primary">
-                Ajouter
-              </button>
+              <button
+                  class="btn bg-gradient-primary"
+                  v-if="step > 1"
+                  @click.prevent="step--"
+                >
+                  Précédent
+                </button>
+                <button
+                  class="btn bg-gradient-primary"
+                  v-if="step < 3"
+                  @click.prevent="step++"
+                >
+                  Suivant
+                </button>
+                <button
+                  type="submit"
+                  class="btn bg-gradient-primary"
+                  v-if="step === 3"
+                >
+                  Ajouter
+                </button>
             </div>
           </form>
         </div>
@@ -616,6 +690,7 @@ export default {
       listRoles: [],
       formData: {},
       showPwd: false,
+      step:1,
     };
   },
   methods: {
