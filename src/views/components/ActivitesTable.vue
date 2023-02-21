@@ -146,6 +146,7 @@
                 class="form-control"
                 name="nom"
                 id="recipient-name"
+                required
               />
             </div>
             <div class="form-group">
@@ -267,6 +268,7 @@
                 class="form-control"
                 name="nom"
                 id="recipient-name"
+                required
               />
             </div>
             <div class="form-group">

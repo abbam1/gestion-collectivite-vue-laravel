@@ -214,7 +214,7 @@
             <input type="hidden" name="_method" value="put" />
             <div class="d-flex justify-content-center">
 
-            <h2>①/③</h2>
+            <h2>①/②</h2>
             </div>
             <div class="form-group">
               <label for="recipient-nom" class="col-form-label">Nom:</label>
@@ -261,7 +261,7 @@
             <step2 v-show="step === 2">
               <div class="d-flex justify-content-center">
 
-<h2>②/③</h2>
+<h2>②/②</h2>
 </div>
             <div class="form-group">
               <label for="recipient-contact" class="col-form-label"
@@ -279,7 +279,7 @@
               <input
                 type="text"
                 class="form-control"
-                name="post"
+                name="poste"
                 id="recipient-poste"
               />
             </div>
@@ -306,44 +306,6 @@
             </div>
           </step2>
           <!--end step2-->
-
-          <step3 v-show="step === 3">
-            <div class="d-flex justify-content-center">
-                <h2>③/③</h2>
-              </div>
-            <div class="form-group">
-              <label for="password-field" class="col-form-label"
-                >Mot de passe:</label
-              >
-              <div class="mot-de-passe">
-                <input
-                  :type="showPwd ? 'text' : 'password'"
-                  class="form-control"
-                  name="password"
-                  id="password-field"
-                /><span
-                  class="fa fa-fw fa-eye field-icon toggle-password"
-                  @click="showPwd = !showPwd"
-                ></span>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="password-field1" class="col-form-label"
-                >Confirmer Mot de passe:</label
-              >
-              <div class="mot-de-passe">
-                <input
-                  :type="showPwd ? 'text' : 'password'"
-                  class="form-control"
-                  name="password_confirmation"
-                  id="password-field1"
-                /><span
-                  class="fa fa-fw fa-eye field-icon toggle-password"
-                  @click="showPwd = !showPwd"
-                ></span>
-              </div>
-            </div>
-            </step3>
             <div class="modal-footer">
               <button
                 type="button"
@@ -362,7 +324,7 @@
                 </button>
                 <button
                   class="btn bg-gradient-primary"
-                  v-if="step < 3"
+                  v-if="step < 2"
                   @click.prevent="step++"
                 >
                   Suivant
@@ -370,8 +332,9 @@
                 <button
                   type="submit"
                   class="btn bg-gradient-primary"
-                  v-if="step === 3"
-                >
+                  v-if="step === 2"
+                  data-bs-dismiss="modal"
+                  >
                   Modifier
                 </button>            </div>
           </form>
@@ -531,10 +494,10 @@
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Poste:</label>
               <input
-                v-model="formData.post"
+                v-model="formData.poste"
                 type="text"
                 class="form-control"
-                name="post"
+                name="poste"
                 id="recipient-name"
               />
             </div>
@@ -727,6 +690,7 @@ export default {
           this.formData.contacts = " ";
           this.formData.password = " ";
           this.formData.password_confirmation = " ";
+          this.formData.poste = " ";
           this.formData.commune_id = " ";
           this.formData.role = " ";
         })
@@ -749,6 +713,7 @@ export default {
       $("input[name=contacts]").val(item.contacts);
       $("input[name=password]").val(item.password);
       $("input[name=password_confirmation]").val(item.password_confirmation);
+      $("input[name=poste]").val(item.poste);
       $("select[name=commune_id]").val(item.commune_id);
       $("select[name=role]").val(item.roles[0].name);
       }
@@ -761,6 +726,7 @@ export default {
       $("input[name=contacts]").val("");
       $("input[name=password]").val("");
       $("input[name=password_confirmation]").val("");
+      $("input[name=post]").val("");
       $("select[name=role]").val("");
     },
     editForm() {
@@ -791,6 +757,7 @@ export default {
           this.formData.contacts = " ";
           this.formData.password = " ";
           this.formData.password_confirmation = " ";
+          this.formData.post = " ";
           this.formData.commune_id = " ";
           this.formData.role = " ";
         })
