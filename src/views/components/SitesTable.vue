@@ -508,18 +508,28 @@ export default {
     },
 
      getData() {
+      
+      Swal.fire({
+        title: 'Chargement de la table!',
+        html: 'Veuillez  patientez.',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
       this.$axios
         .get("/sites")
         .then((res) => {
           this.items = res.data.data;
+          Swal.close();
           $(document).ready(function () {
-           $("#datatable").DataTable({
+            $("#datatable").DataTable({
               destroy: true,
               language: {
                 url:
                   "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json",
-                   },
-                   
+              },
+
             });
 
           });

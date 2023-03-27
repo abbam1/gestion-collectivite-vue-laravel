@@ -450,10 +450,19 @@ export default {
     },
 
     async getData() {
+      Swal.fire({
+        title: 'Chargement de la table!',
+        html: 'Veuillez  patientez.',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
       this.$axios
         .get("/activites")
         .then((res) => {
           this.items = res.data.data;
+          Swal.close();
           $(document).ready(function () {
             $("#datatable").DataTable({
               destroy: true,
